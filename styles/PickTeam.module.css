@@ -1,0 +1,32 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    border-radius: 5px;
+}
+
+.selected {
+    color: gray;
+    background-color: #3A3A3A;
+}
+
+.selected::after {
+    content: "selected";
+    margin-left: 1rem;
+}
+
+.container:hover {
+    background-color: #3A3A3A;
+    cursor: pointer;
+}
+
+.teamLogo {
+    max-width: 3rem;
+}
+
+.teamName {
+    font-size: 1.5em;
+    font-weight: 300;
+    margin-left: 1rem;
+}

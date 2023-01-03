@@ -1,0 +1,117 @@
+.container {
+  position: relative;
+  color: white;
+  padding-top: 3rem;
+  min-height: 100vh;
+  background-image: url('../public/images/real-bball.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 0 auto;
+}
+
+.main {
+  max-width: 55rem;
+  /* backdrop-filter: blur(10px); */
+  margin: 0 auto;
+  padding: 3rem 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.titleContainer {
+  display: flex;
+  gap: .5rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  margin: 0;
+  font-size: 2.5em;
+  font-weight: 600;
+}
+
+.title,
+.subtitle {
+  font-family: 'Nunito', sans-serif;
+  text-align: center;
+}
+
+.subtitle {
+  margin: 0;
+  font-weight: 400;
+  font-size: 1.2em;
+}
+
+.contentContainer {
+  padding: 6rem 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 1.5rem;
+  flex: 1;
+  width: 100%;
+}
+
+.featuresList {
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 2rem;
+  width: 100%;
+}
+
+.featuresItem {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 600;
+  font-size: 1.3em;
+}
+
+.startLink {
+  background-color: #F58426;
+  width: 100%;
+  border-radius: 50px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 600;
+  font-size: 1.7em;
+  padding: .7rem 0;
+  text-align: center;
+}
+
+.startLink:hover {
+  cursor: pointer;
+}
+
+.footer {
+  max-height: 8vh;
+  position: absolute;
+  background-color: #191610;
+  bottom: 0;
+  flex: 1;
+  font-size: .9em;
+  font-weight: 400;
+  padding: 1rem 2rem;
+  width: 100%;
+  font-family: 'Nunito', sans-serif;
+}
+
+.footer a {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  text-decoration: underline;
+  flex-grow: 1;
+}
+
+.footer a:hover {
+  cursor: pointer;
+}

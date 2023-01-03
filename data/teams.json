@@ -1,0 +1,88 @@
+[
+  {
+    "teamName": "Knicks",
+    "city": "New York",
+    "taxApron": 6012000,
+    "taxSpace": 12000,
+    "capSpace": 10000,
+    "hardCap": true,
+    "tradeExceptions": [],
+    "disabledPlayerExceptions": [],
+    "conference": "East",
+    "players": [],
+    "logoPath": "../../images/team-logos/knicks-logo.png"
+  },
+  {
+    "teamName": "Hawks",
+    "city": "Atlanta",
+    "taxApron": "7777776000000",
+    "taxSpace": "777777",
+    "capSpace": "77777",
+    "hardCap": false,
+    "tradeExceptions": [
+      { "exceptionType": "DisabledPlayerException", "ammount": "333333" }
+    ],
+    "conference": "East",
+    "players": [
+      {
+        "playerName": "TraeYoung",
+        "firstName": "Trae",
+        "lastName": "Young",
+        "teamName": "Hawks",
+        "incomingSalary": "309234940",
+        "outgoingSalary": "0942092309",
+        "profileImage": "../images/default-players/Hawks-default-player.png",
+        "isTwoWay": "false",
+        "isPoisonPill": "false",
+        "playerType": "RosterPlayer",
+        "tradeKicker": "0",
+        "cannotTradeUntilDate": "null",
+        "cannotTradeWithOtherPlayersUntilDate": "null",
+        "isUpcomingFreeAgent": "false",
+        "hasPlayerOption": "false",
+        "teamsCannotBeTradedTo": ["Lakers"],
+        "hasTeamOption": "false"
+      }
+    ],
+    "logoPath": "../../images/team-logos/hawks-logo.png"
+  },
+  {
+    "teamName": "Lakers",
+    "city": "Los Angeles",
+    "taxApron": 5978667,
+    "taxSpace": -21333,
+    "capSpace": 34999,
+    "hardCap": false,
+    "tradeExceptions": [],
+    "disabledPlayerExceptions": [],
+    "conference": "West",
+    "players": [],
+    "logoPath": "../../images/team-logos/lakers-logo.png"
+  },
+  {
+    "teamName": "Clippers",
+    "city": "Los Angeles",
+    "taxApron": 9929393,
+    "taxSpace": 3929393,
+    "capSpace": 4902939,
+    "hardCap": false,
+    "tradeExceptions": [],
+    "disabledPlayerExceptions": [],
+    "conference": "West",
+    "players": [],
+    "logoPath": "../../images/team-logos/clippers-logo.png"
+  },
+  {
+    "teamName": "Rockets",
+    "city": "Houston",
+    "taxApron": 9929393,
+    "taxSpace": 3929393,
+    "capSpace": 4902939,
+    "hardCap": false,
+    "tradeExceptions": [],
+    "disabledPlayerExceptions": [],
+    "conference": "West",
+    "players": [],
+    "logoPath": "../../images/team-logos/rockets-logo.png"
+  }
+]

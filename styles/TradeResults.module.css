@@ -1,0 +1,104 @@
+.container {
+    margin: 0 auto;
+    padding: 1rem 3.7rem;
+}
+
+.tradeTeams{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.tradeIcon {
+    max-width: 100%;
+    max-height: 3rem;
+}
+
+.tradeHeader {
+    font-size: 1.8em;
+    font-weight: 600;
+    width: 100%;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+.tradeSubTitle {
+    font-size: .5em;
+    font-weight: 300;
+    width: 100%;
+    text-align: center;
+}
+
+.buttonsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    padding: 1rem 0;
+}
+
+.tradeButton {
+    border: none;
+    border-radius: 15px;
+    font-weight: 600;
+    font-family: 'Nunito', sans-serif;
+    font-size: .6em;
+    padding: .5rem 1rem;
+    min-width: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+    cursor: pointer;
+    color: white;
+    background-color: #F58426;
+}
+
+.tradeButton img {
+    max-width: 1.5rem;
+}
+
+@media screen and (min-width: 600px) {
+    .tradeHeader {
+        font-size: 2em;
+    }
+    .tradeSubTitle {
+        font-size: .7em;
+    }
+    .tradeButton {
+        min-width: 6rem;
+        font-size: .8em;
+    }
+  }
+  
+  @media screen and (min-width: 900px) {
+    .tradeHeader {
+        font-size: 2.2em;
+    }
+    .tradeSubTitle {
+        font-size: .8em;
+    }
+    .tradeButton {
+        min-width: 7rem;
+        font-size: .9em;
+    }
+  }
+  
+  @media screen and (min-width: 1150px) {
+    .container {
+      max-width: 1300px;
+    }
+    .tradeHeader {
+        font-size: 2.2em;
+    }
+    .tradeSubTitle {
+        font-size: .8em;
+    }
+    .tradeButton {
+        min-width: 7rem;
+        font-size: .9em;
+    }
+  }

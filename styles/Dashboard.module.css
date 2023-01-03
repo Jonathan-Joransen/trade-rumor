@@ -1,0 +1,117 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
+    width: 100vw;
+}
+
+.teamForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .3rem;
+    padding: 1rem;
+    border-radius: 5px;
+    border: white solid 1px;
+}
+
+.teamForm form button {
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.teamsContainer {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+    padding: 2rem;
+}
+
+.teamButton {
+    padding: 1rem;
+    color: white;
+    background-color: #F58426;
+}
+
+.playerContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+    gap: 1rem;
+    justify-content: center;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.471);
+    border-radius: 5px;
+}
+
+.player {
+    display: grid;
+    margin: 0 auto;
+    width: 80%;
+    grid-template-columns: repeat(2, 1fr);
+    gap: .4rem;
+    align-items: center;
+    justify-content: center;
+    font-size: 1em;
+}
+
+.playerStat {
+    width: 100%;
+}
+
+.deleteButton {
+    background-color: #F58426;
+    color: white;
+    padding: .5rem;
+    font-size: 1.2em;
+    font-weight: 500;
+    width: 100%;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+}
+
+.exContainer {
+    width: 80%;
+    background-color: rgba(0, 0, 0, 0.471);
+    border-radius: 5px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.header {
+    font-size: 1.2em;
+}
+
+.teamInfo {
+    background-color: #131313;
+    width: 100%;
+    padding: 1rem;
+    display: grid;
+    align-items: center;
+    justify-content: space-between;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.deleteExButton {
+    background-color: #F58426;
+    color: white;
+    padding: .2rem;
+    font-size: 1.2em;
+    font-weight: 500;
+    width: 100%;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+}
