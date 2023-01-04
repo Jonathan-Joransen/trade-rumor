@@ -14,7 +14,6 @@ const PopUp = ({
 
   const createPromise = (): Promise<string> => {
     return new Promise<string>((resolve, reject) => {
-      console.log("got promise")
       setResolver({ resolve });
     });
   };
@@ -27,7 +26,6 @@ const PopUp = ({
 
   const onClick = async (status: string) => {
     setOpen(false);
-    console.log(resolver)
     resolver.resolve(status);
   };
 
