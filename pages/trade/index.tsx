@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { GetServerSideProps } from "next";
 import Team from "../../model/Team";
 import { useRouter } from "next/router";
+import Database from "../../data/Database";
 
 const Trade = ({
   westTeams,
@@ -100,10 +101,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     let teamNames: string[] = JSON.parse(
       (context.query["teamNames"] as string) ?? "[]"
     );
+      
+      const db = new Database();
+      let allTeams = await db.GetTeams();
 
-
-      let response = await fetch(`/api/teams`)
-      let allTeams = await response.json()
       let westTeams = allTeams.filter((team: Team) => team.conference.toLocaleLowerCase() === "west")
       let eastTeam = allTeams.filter((team: Team) => team.conference.toLocaleLowerCase() === "east")
 
