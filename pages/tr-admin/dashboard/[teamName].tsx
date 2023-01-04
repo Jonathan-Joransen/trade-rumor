@@ -13,6 +13,7 @@ import Dashboard from ".";
 import DashboardPlayer from "../../../components/dashboardPlayers";
 import Player from "../../../model/Player";
 import { DashboardExceptions } from "../../../components/dashboardException";
+import DatabaseClient from "../../../data/Database";
 
 const EditTeam = ({ initialTeam }: { initialTeam: Team }) => {
   const [team, setTeam] = useState(initialTeam);
@@ -358,16 +359,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
-  let response = await fetch(
-    `/api/teams?teamName=${context?.params?.teamName}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
-  let team = await response.json();
+  const db = new DatabaseClient();
+  let team = await db.GetTeam(context?.params?.teamName as string)
+
   return {
     props: { initialTeam: team },
   };

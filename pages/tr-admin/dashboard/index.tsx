@@ -3,6 +3,7 @@ import { getSession } from 'next-auth/react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useState } from 'react';
+import DatabaseClient from '../../../data/Database';
 import Player from '../../../model/Player';
 import PlayerType from '../../../model/playerTypes';
 import { RosterPlayer } from '../../../model/RosterPlayer';
@@ -115,8 +116,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         }
     }
 
-    let response = await fetch(`/api/teams`);
-    let teams = await response.json();
+    const db = new DatabaseClient();
+    let teams = await db.GetTeams();
 
     return {
         props: {initialTeams: teams}

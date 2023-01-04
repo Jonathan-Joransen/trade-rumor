@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Header } from "../../components/header";
 import { TeamPreview } from "../../components/teamPreview";
 import TeamRoster from "../../components/teamRoster";
+import DatabaseClient from "../../data/Database";
 import Cash from "../../model/Cash";
 import { PlayerInTrade } from "../../model/PlayerInTrade";
 import Team from "../../model/Team";
@@ -104,8 +105,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   try {
     let teamNames: string[] = JSON.parse(context.query["teamNames"] as string);
 
-    let response = await fetch(`/api/teams`);
-    let allTeams = await response.json();
+    const db = new DatabaseClient();
+    let allTeams = await db.GetTeams();
+
     let teams = allTeams.filter((team: Team) =>
       teamNames.includes(team.teamName)
     );

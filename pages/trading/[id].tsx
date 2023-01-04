@@ -3,6 +3,7 @@ import { useRouter } from "next/router"
 import React from "react"
 import { Header } from "../../components/header"
 import { TeamPreview } from "../../components/teamPreview"
+import DatabaseClient from "../../data/Database"
 import TradeResult from "../../model/TradeResult"
 import styles from "../../styles/TradeResults.module.css"
 
@@ -87,10 +88,9 @@ export const TradeResultsFromId = ({tradeResult}: {tradeResult: TradeResult}) =>
 
 export const getServerSideProps: GetServerSideProps = async (context) => {  
     try {
-        let response = await fetch(`/api/trade?id=` + context.query["id"] as string);
-        let tradeResult = await response.json();
-        
-        if (response.status === 404) { 
+        let db = new DatabaseClient();
+        let tradeResult = await db.GetTrade( context.query["id"] as string)
+        if (tradeResult === null || tradeResult === undefined) { 
             return {
             notFound: true,
             }
