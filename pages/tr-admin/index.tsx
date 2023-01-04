@@ -10,13 +10,14 @@ const AdminLogin = () => {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const router = useRouter();
+    const { callbackUrl = "/tr-admin/dashboard" } = router.query;
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
             setError('');
             setLoading(true);
-            await signIn('credentials', { userName, password, callbackUrl: `${window.location.origin}/tr-admin/dashboard`})
+            await signIn('credentials', { userName, password, callbackUrl: callbackUrl as string})
         } catch {
             setError('Failed to log in');
         }

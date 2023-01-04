@@ -10,7 +10,7 @@ export default class Player {
         this.teamName = teamName
         this.incomingSalary = incomingSalary
         this.outgoingSalary = outgoingSalary
-        this.profileImage = profileImage ?? `../images/default-players/${teamName}-default-player.png`
+        this.profileImage = profileImage ?? `../images/default-players/${teamName.toLowerCase().replace(/\s+/g, '')}-default-player.png`
         this.isTwoWay = isTwoWay
         this.isPoisonPill = isPoisonPill
         this.playerType = playerType
