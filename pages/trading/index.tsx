@@ -104,7 +104,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   try {
     let teamNames: string[] = JSON.parse(context.query["teamNames"] as string);
 
-    let response = await fetch(`${process.env.BASE_URL}/api/teams`);
+    let response = await fetch(`/api/teams`);
     let allTeams = await response.json();
     let teams = allTeams.filter((team: Team) =>
       teamNames.includes(team.teamName)

@@ -102,7 +102,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     );
 
 
-      let response = await fetch(`${process.env.BASE_URL}/api/teams`)
+      let response = await fetch(`/api/teams`)
       let allTeams = await response.json()
       let westTeams = allTeams.filter((team: Team) => team.conference.toLocaleLowerCase() === "west")
       let eastTeam = allTeams.filter((team: Team) => team.conference.toLocaleLowerCase() === "east")

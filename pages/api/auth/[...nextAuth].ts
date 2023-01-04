@@ -12,7 +12,7 @@ const options: NextAuthOptions = {
           credentials: {
           },
           async authorize(credentials, req) {
-            const res = await fetch(`${process.env.BASE_URL}/api/auth/admin-login`, {
+            const res = await fetch(`/api/auth/admin-login`, {
               method: 'POST',
               body: JSON.stringify(credentials),
               headers: { "Content-Type": "application/json" }

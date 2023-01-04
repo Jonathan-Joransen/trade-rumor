@@ -13,7 +13,7 @@ export const SavedTrades = () => {
         const initialSavedTrades: TradeResult[] = []
         const fetchIds = async () => {
             for (let i = 0; i < savedIds.length; i++) {
-                const response = await fetch(`${process.env.BASE_URL}/api/trade?id=${savedIds[i]}`)
+                const response = await fetch(`/api/trade?id=${savedIds[i]}`)
                 const trade = await response.json()
                 initialSavedTrades.push(trade)
             }

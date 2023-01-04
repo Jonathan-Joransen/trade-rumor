@@ -87,7 +87,7 @@ export const TradeResultsFromId = ({tradeResult}: {tradeResult: TradeResult}) =>
 
 export const getServerSideProps: GetServerSideProps = async (context) => {  
     try {
-        let response = await fetch(`${process.env.BASE_URL}/api/trade?id=` + context.query["id"] as string);
+        let response = await fetch(`/api/trade?id=` + context.query["id"] as string);
         let tradeResult = await response.json();
         
         if (response.status === 404) { 

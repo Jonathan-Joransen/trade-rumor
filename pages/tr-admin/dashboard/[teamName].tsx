@@ -359,7 +359,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   let response = await fetch(
-    `${process.env.BASE_URL}/api/teams?teamName=${context?.params?.teamName}`,
+    `/api/teams?teamName=${context?.params?.teamName}`,
     {
       method: "GET",
       headers: {
