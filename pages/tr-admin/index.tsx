@@ -46,7 +46,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
     const session = await getSession(context);
     if (session !== null && res !== null) {
-        console.log("here")
         res.writeHead(302, {
             Location: `${req.headers.host}/tr-admin/dashboard`,
         });
