@@ -1,20 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "../../styles/AdminLogin.module.css";
 import {signIn, getSession} from "next-auth/react";
 import { GetServerSideProps } from "next";
+import { Session } from "next-auth";
+import { useRouter } from "next/router";
 
-const AdminLogin = () => {
+const AdminLogin = ({session, signedIn}: {session: Session | null, signedIn: boolean}) => {
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const router = useRouter();
+
+    useEffect(() => {
+        if (signedIn) {
+            router.push('/tr-admin/dashboard');
+        }
+    }, []);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
             setError('');
             setLoading(true);
-            await signIn('credentials', { userName, password, callbackUrl: `https://nbatraderumor.com/tr-admin/dashboard`})
+            await signIn('credentials', { userName, password, callbackUrl: `http://localhost:3000/tr-admin/dashboard`})
         } catch {
             setError('Failed to log in');
         }
@@ -43,16 +52,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const {req, res} = context;
 
     const session = await getSession(context);
-    if (session !== null && res !== null) {
-        res.writeHead(302, {
-            Location: `tr-admin/dashboard`,
-        });
-        res.end();
-        return {props: {session: session}};
+    if (session !== null) {
+        return {props: {session: session, signedIn: true}};
     }
 
     return {
-        props: {session: null}
+        props: {session: null, signedIn: false}
     };
 }
 

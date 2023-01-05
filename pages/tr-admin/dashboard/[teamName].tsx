@@ -1,5 +1,5 @@
 import { GetServerSideProps } from "next";
-import { getSession } from "next-auth/react";
+import { getSession, signOut } from "next-auth/react";
 import Head from "next/head";
 import React, { useState } from "react";
 import Team from "../../../model/Team";
@@ -13,6 +13,7 @@ import DashboardPlayer from "../../../components/dashboardPlayers";
 import Player from "../../../model/Player";
 import { DashboardExceptions } from "../../../components/dashboardException";
 import DatabaseClient from "../../../data/Database";
+import Link from "next/link";
 
 const EditTeam = ({ initialTeam }: { initialTeam: Team }) => {
   const [team, setTeam] = useState(initialTeam);
@@ -115,6 +116,10 @@ const EditTeam = ({ initialTeam }: { initialTeam: Team }) => {
     }
   };
 
+  let handleSignOut = async () => {
+    await signOut({redirect: true, callbackUrl: '/'});
+  };
+
   return (
     <div className={styles.container}>
       <Head>
@@ -126,6 +131,10 @@ const EditTeam = ({ initialTeam }: { initialTeam: Team }) => {
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
+      <div className={dashStyles.header}>
+                <Link href="/tr-admin/dashboard"><h1>Dashboard</h1></Link>
+                <button className={dashStyles.signOutButton} type="submit" onClick={handleSignOut}>Log Out</button>
+            </div>
       {team && (
         <div className={styles.teamContainer}>
             <div className={styles.teamMain}>

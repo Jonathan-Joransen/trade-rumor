@@ -2,13 +2,16 @@ import { GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/react';
 import Head from 'next/head';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import DatabaseClient from '../../../data/Database';
 import Team from '../../../model/Team';
 import styles from '../../../styles/Dashboard.module.css';
+import { signOut } from "next-auth/react"
 
 const Dashboard = ({initialTeams}: {initialTeams: Array<Team>}) => {
 
+    const router = useRouter();
     const [teams, setTeams] = useState<Array<Team>>(initialTeams);
     const [showAddTeam, setShowAddTeam] = useState<boolean>(false);
 
@@ -39,6 +42,10 @@ const Dashboard = ({initialTeams}: {initialTeams: Array<Team>}) => {
             console.log('Team already exists')
         }
     }
+
+    let handleSignOut = async () => {
+        await signOut({redirect: true, callbackUrl: '/'});
+    };
     
     return (
         <div className={styles.container}>
@@ -51,7 +58,10 @@ const Dashboard = ({initialTeams}: {initialTeams: Array<Team>}) => {
                 />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
             </Head>
-            <h1>Dashboard</h1>
+            <div className={styles.header}>
+                <h1>Dashboard</h1>
+                <button className={styles.signOutButton} type="submit" onClick={handleSignOut}>Log Out</button>
+            </div>
             <div className={styles.teamsContainer}>
                 { teams && teams.map((team, idx) => {
                     return (<Link href={`./dashboard/${team.teamName}`} className={styles.teamButton} key={idx}>
