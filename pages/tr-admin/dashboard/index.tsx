@@ -10,8 +10,6 @@ import styles from '../../../styles/Dashboard.module.css';
 import { signOut } from "next-auth/react"
 
 const Dashboard = ({initialTeams}: {initialTeams: Array<Team>}) => {
-
-    const router = useRouter();
     const [teams, setTeams] = useState<Array<Team>>(initialTeams);
     const [showAddTeam, setShowAddTeam] = useState<boolean>(false);
 
@@ -60,7 +58,7 @@ const Dashboard = ({initialTeams}: {initialTeams: Array<Team>}) => {
             </Head>
             <div className={styles.header}>
                 <h1>Dashboard</h1>
-                <button className={styles.signOutButton} type="submit" onClick={handleSignOut}>Log Out</button>
+                <button className={styles.signOutButton} type="submit" onClick={() => handleSignOut()}>Log Out</button>
             </div>
             <div className={styles.teamsContainer}>
                 { teams && teams.map((team, idx) => {

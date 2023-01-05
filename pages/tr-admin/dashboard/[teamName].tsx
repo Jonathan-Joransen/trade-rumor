@@ -133,7 +133,7 @@ const EditTeam = ({ initialTeam }: { initialTeam: Team }) => {
       </Head>
       <div className={dashStyles.header}>
                 <Link href="/tr-admin/dashboard"><h1>Dashboard</h1></Link>
-                <button className={dashStyles.signOutButton} type="submit" onClick={handleSignOut}>Log Out</button>
+                <button className={dashStyles.signOutButton} type="submit" onClick={() => handleSignOut()}>Log Out</button>
             </div>
       {team && (
         <div className={styles.teamContainer}>
