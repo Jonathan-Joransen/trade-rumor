@@ -14,7 +14,7 @@ const AdminLogin = () => {
         try {
             setError('');
             setLoading(true);
-            await signIn('credentials', { userName, password, callbackUrl: `tr-admin/dashboard`})
+            await signIn('credentials', { userName, password, callbackUrl: `${process.env.BASE_URL}/tr-admin/dashboard`})
         } catch {
             setError('Failed to log in');
         }
