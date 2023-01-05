@@ -7,7 +7,7 @@ export default class DatabaseClient {
 
     UpdateTeam(team: Team): void {
         let teams: any[] = []
-        fs.readFile('./data/teams.json', 'utf8', function (err,data) {
+        fs.readFile(`${process.env.DATA_PATH}/teams.json`, 'utf8', function (err,data) {
             try {
                 teams = JSON.parse(data)
                 let index = teams.findIndex(t => t.teamName.toLowerCase() === team.teamName.toLowerCase())
@@ -15,7 +15,7 @@ export default class DatabaseClient {
                     return // team doesn't exist
                 }
                 teams[index] = team
-                fs.writeFile('./data/teams.json', JSON.stringify(teams), function (err) {
+                fs.writeFile(`${process.env.DATA_PATH}/teams.json`, JSON.stringify(teams), function (err) {
                     if (err) return console.log(err);
                 });
             } catch (error) {
@@ -26,7 +26,7 @@ export default class DatabaseClient {
 
     AddTeam(team: Team): void {
         let teams: any[] = []
-        fs.readFile('./data/teams.json', 'utf8', function (err,data) {
+        fs.readFile(`${process.env.DATA_PATH}/teams.json`, 'utf8', function (err,data) {
             try {
                 console.log(data)
                 teams = JSON.parse(data)
@@ -34,13 +34,13 @@ export default class DatabaseClient {
                     return // team already exists
                 }
                 teams.push(team)
-                fs.writeFile('./data/teams.json', JSON.stringify(teams), function (err) {
+                fs.writeFile(`${process.env.DATA_PATH}/teams.json`, JSON.stringify(teams), function (err) {
                     if (err) return console.log(err);
                 });
             } catch (error) {
                 console.log(error)
                 teams.push(team)
-                fs.writeFile('./data/teams.json', JSON.stringify(teams), function (err) {
+                fs.writeFile(`${process.env.DATA_PATH}/teams.json`, JSON.stringify(teams), function (err) {
                     if (err) return console.log(err);
                 });
             }
@@ -48,7 +48,7 @@ export default class DatabaseClient {
     }
 
     async GetTeams(): Promise<Team[]> {
-        let data = await fs.readFileSync('./data/teams.json',  'utf8');
+        let data = await fs.readFileSync(`${process.env.DATA_PATH}/teams.json`,  'utf8');
         return JSON.parse(data)
     }
 
@@ -59,18 +59,18 @@ export default class DatabaseClient {
 
     AddPlayer(player: Player): void {
         let players: any[] = []
-        fs.readFile('./data/players.json', 'utf8', function (err,data) {
+        fs.readFile(`${process.env.DATA_PATH}/players.json`, 'utf8', function (err,data) {
             try {
                 console.log(data)
                 players = JSON.parse(data)
                 players.push(player)
-                fs.writeFile('./data/players.json', JSON.stringify(players), function (err) {
+                fs.writeFile(`${process.env.DATA_PATH}/players.json`, JSON.stringify(players), function (err) {
                     if (err) return console.log(err);
                 });
             } catch (error) {
                 console.log(error)
                 players.push(player)
-                fs.writeFile('./data/players.json', JSON.stringify(players), function (err) {
+                fs.writeFile(`${process.env.DATA_PATH}/players.json`, JSON.stringify(players), function (err) {
                     if (err) return console.log(err);
                 });
             }
@@ -78,7 +78,7 @@ export default class DatabaseClient {
     }
 
     async GetPlayers(): Promise<Player[]> {
-        let data = await fs.readFileSync('./data/players.json',  'utf8');
+        let data = await fs.readFileSync(`${process.env.DATA_PATH}/players.json`,  'utf8');
         return JSON.parse(data)
     }
 
@@ -90,18 +90,18 @@ export default class DatabaseClient {
         }
 
         let trades: any[] = []
-        fs.readFile('./data/trades.json', 'utf8', function (err,data) {
+        fs.readFile(`${process.env.DATA_PATH}/trades.json`, 'utf8', function (err,data) {
             try {
                 console.log(data)
                 trades = JSON.parse(data)
                 trades.push(trade)
-                fs.writeFile('./data/trades.json', JSON.stringify(trades), function (err) {
+                fs.writeFile(`${process.env.DATA_PATH}/trades.json`, JSON.stringify(trades), function (err) {
                     if (err) return console.log(err);
                 });
             } catch (error) {
                 console.log(error)
                 trades.push(trade)
-                fs.writeFile('./data/trades.json', JSON.stringify(trades), function (err) {
+                fs.writeFile(`${process.env.DATA_PATH}/trades.json`, JSON.stringify(trades), function (err) {
                     if (err) return console.log(err);
                 });
             }
@@ -110,7 +110,7 @@ export default class DatabaseClient {
 
     async GetTrade(id: string): Promise<TradeResult | undefined> {
         try{
-            let data = await fs.readFileSync('./data/trades.json',  'utf8');
+            let data = await fs.readFileSync(`${process.env.DATA_PATH}/trades.json`,  'utf8');
             let trades = JSON.parse(data)
             let trade = trades.find((t: TradeResult) => t.id === id)
 

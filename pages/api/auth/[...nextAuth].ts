@@ -12,17 +12,12 @@ const options: NextAuthOptions = {
           credentials: {
           },
           async authorize(credentials, req) {
-            const res = await fetch(`/api/auth/admin-login`, {
-              method: 'POST',
-              body: JSON.stringify(credentials),
-              headers: { "Content-Type": "application/json" }
-            })
-            const user = await res.json()
-      
-            // If no error and we have user data, return it
-            if (res.ok && user) {
-              return user
+            const {userName, password} = JSON.parse(JSON.stringify(credentials))
+    
+            if(userName === "admin" && password === process.env.ADMIN_PASSWORD) {
+              return JSON.parse(JSON.stringify({name: "Admin", role: "admin"}))
             }
+            
             // Return null if user data could not be retrieved
             return null
           }

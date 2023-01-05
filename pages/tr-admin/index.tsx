@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import { useState } from "react";
 import styles from "../../styles/AdminLogin.module.css";
 import {signIn, getSession} from "next-auth/react";
@@ -9,15 +8,13 @@ const AdminLogin = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-    const router = useRouter();
-    const { callbackUrl = "/tr-admin/dashboard" } = router.query;
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
             setError('');
             setLoading(true);
-            await signIn('credentials', { userName, password, callbackUrl: callbackUrl as string})
+            await signIn('credentials', { userName, password, callbackUrl: `http://localhost:3000/tr-admin/dashboard`})
         } catch {
             setError('Failed to log in');
         }

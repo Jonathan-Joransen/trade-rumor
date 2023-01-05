@@ -3,6 +3,8 @@ import { getSession } from 'next-auth/react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useState } from 'react';
+import Dropdown from '../../../components/dropdown';
+import PopUp from '../../../components/popup';
 import DatabaseClient from '../../../data/Database';
 import Player from '../../../model/Player';
 import PlayerType from '../../../model/playerTypes';
@@ -13,6 +15,7 @@ import styles from '../../../styles/Dashboard.module.css';
 const Dashboard = ({initialTeams}: {initialTeams: Array<Team>}) => {
 
     const [teams, setTeams] = useState<Array<Team>>(initialTeams);
+    const [showAddTeam, setShowAddTeam] = useState<boolean>(false);
 
     let handleAddTeam = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -61,42 +64,30 @@ const Dashboard = ({initialTeams}: {initialTeams: Array<Team>}) => {
                             </Link>)
                 })}
             </div>
-            <div className={styles.teamForm}>
-            <form className="form-group" onSubmit={handleAddTeam}>
-                <h1>Add Team</h1>
-                <label htmlFor="teamName">Team Name</label>
-                <input className="form-control" type="text" name="teamName" id="teamName" />
-                <label htmlFor="teamCity">Team City</label>
-                <input className="form-control" type="text" name="teamCity" id="teamCity" />
-                <label htmlFor="teamConference">Team Conference</label>
-                <input className="form-control" type="text" name="teamConference" id="teamConference" />
-                <label htmlFor="capSpace">Cap Space</label>
-                <input className="form-control" type="number" name="capSpace" id="capSpace" />
-                <label htmlFor="taxSpace">Tax Space</label>
-                <input className="form-control" type="number" name="taxSpace" id="taxSpace" />
-                <label htmlFor="hardCap">Hard Cap</label>
-                <input className="form-control" type="text" placeholder='True or False' name="hardCap" id="hardCap" />
-            <button className="btn btn-primary" value="Submit">Add Team</button>
-            </form>
-            </div>
-            {/* <div className={styles.playerContainer}> */}
-            {/* { rosterPlayers !== undefined &&
-                rosterPlayers.map((player, idx) => {
-                    let rosterPlayer = player as RosterPlayer;
-                    return (
-                        <div className={styles.player}>
-                            {
-                                Object.keys(rosterPlayer).map((key) => {
-                                    return (
-                                        key !== "profileImage" && key !== "playerType"  && <div className={styles.playerStat}>{rosterPlayer[key]}</div>
-                                    );
-                                })
-                            }
-                        </div>
-                    );
-                })
-            } */}
-            {/* </div> */}
+            <button className={styles.addTeamButton} onClick={() => setShowAddTeam((prevTeam) => !prevTeam)}><img src="../images/plus (1) white.png"></img>New Team</button>
+            { showAddTeam &&
+                <div className={styles.teamFormContainer} >
+                <div className={styles.teamForm}>
+                <button className={styles.closeFormButton} onClick={() => setShowAddTeam(false)}><img src="../images/fail-x.png"></img></button>
+                <form className="form-group" onSubmit={handleAddTeam}>
+                    <h1>Add Team</h1>
+                    <label htmlFor="teamName">Team Name</label>
+                    <input className="form-control" type="text" name="teamName" id="teamName" />
+                    <label htmlFor="teamCity">Team City</label>
+                    <input className="form-control" type="text" name="teamCity" id="teamCity" />
+                    <label htmlFor="teamConference">Team Conference</label>
+                    <input className="form-control" type="text" name="teamConference" id="teamConference" />
+                    <label htmlFor="capSpace">Cap Space</label>
+                    <input className="form-control" type="number" name="capSpace" id="capSpace" />
+                    <label htmlFor="taxSpace">Tax Space</label>
+                    <input className="form-control" type="number" name="taxSpace" id="taxSpace" />
+                    <label htmlFor="hardCap">Hard Cap</label>
+                    <input className="form-control" type="text" placeholder='True or False' name="hardCap" id="hardCap" />
+                <button className="btn btn-primary" value="Submit">Add Team</button>
+                </form>
+                </div>
+                </div>
+            }
         </div>
     );
 };
