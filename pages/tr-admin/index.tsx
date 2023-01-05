@@ -23,7 +23,7 @@ const AdminLogin = ({session, signedIn}: {session: Session | null, signedIn: boo
         try {
             setError('');
             setLoading(true);
-            await signIn('credentials', { userName, password, callbackUrl: `http://localhost:3000/tr-admin/dashboard`})
+            await signIn('credentials', { userName, password, callbackUrl: `https://nbatraderumor.com/tr-admin/dashboard`})
         } catch {
             setError('Failed to log in');
         }
