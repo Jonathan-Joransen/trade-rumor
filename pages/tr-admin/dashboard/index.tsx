@@ -2,7 +2,6 @@ import { GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 import DatabaseClient from '../../../data/Database';
 import Team from '../../../model/Team';
