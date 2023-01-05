@@ -16,14 +16,14 @@ const AdminLogin = ({session, signedIn}: {session: Session | null, signedIn: boo
         if (signedIn) {
             router.push('/tr-admin/dashboard');
         }
-    }, []);
+    }, [signedIn]);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
             setError('');
             setLoading(true);
-            await signIn('credentials', { userName, password, callbackUrl: "http://localhost:3000/tr-admin/dashboard"})
+            await signIn('credentials', { userName, password})
         } catch {
             setError('Failed to log in');
         }
