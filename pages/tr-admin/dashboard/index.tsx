@@ -3,12 +3,7 @@ import { getSession } from 'next-auth/react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useState } from 'react';
-import Dropdown from '../../../components/dropdown';
-import PopUp from '../../../components/popup';
 import DatabaseClient from '../../../data/Database';
-import Player from '../../../model/Player';
-import PlayerType from '../../../model/playerTypes';
-import { RosterPlayer } from '../../../model/RosterPlayer';
 import Team from '../../../model/Team';
 import styles from '../../../styles/Dashboard.module.css';
 
