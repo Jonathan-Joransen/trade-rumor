@@ -5,12 +5,16 @@ import { useState } from 'react';
 import DatabaseClient from '../../data/Database';
 import Team from '../../model/Team';
 import styles from '../../styles/Dashboard.module.css';
-import { signOut } from "next-auth/react"
+import { signOut, useSession } from "next-auth/react"
 
 const Dashboard = ({initialTeams}: {initialTeams: Array<Team>}) => {
     const [teams, setTeams] = useState<Array<Team>>(initialTeams);
     const [showAddTeam, setShowAddTeam] = useState<boolean>(false);
+    const { status } = useSession({ required: true })
 
+    if (status === "loading") {
+      return <div>Loading...</div>
+    }
     let handleAddTeam = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         let teamName = e.currentTarget.teamName.value;

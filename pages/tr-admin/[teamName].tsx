@@ -1,5 +1,5 @@
 import { GetServerSideProps } from "next";
-import { getSession, signOut } from "next-auth/react";
+import { getSession, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
 import React, { useState } from "react";
 import Team from "../../model/Team";
@@ -21,6 +21,12 @@ const EditTeam = ({ initialTeam }: { initialTeam: Team }) => {
   const [showAddDraftPlayer, setShowAddDraftPlayer] = useState(false);
   const [showAddRosterPlayer, setShowAddRosterPlayer] = useState(false);
   const [showEditTeam, setShowEditTeam] = useState(false);
+
+  const { status } = useSession({ required: true })
+
+  if (status === "loading") {
+    return <div>Loading...</div>
+  }
 
   let asCurrency = (num: number): string => {
     return "$" + num.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
