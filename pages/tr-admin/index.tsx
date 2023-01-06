@@ -40,7 +40,7 @@ const Dashboard = ({initialTeams}: {initialTeams: Array<Team>}) => {
     }
 
     let handleSignOut = async () => {
-        await signOut({redirect: true, callbackUrl: '/'});
+        await signOut({redirect: false});
     };
     
     return (

@@ -117,7 +117,7 @@ const EditTeam = ({ initialTeam }: { initialTeam: Team }) => {
   };
 
   let handleSignOut = async () => {
-    await signOut({redirect: true, callbackUrl: '/'});
+    await signOut({redirect: false});
   };
 
   return (
