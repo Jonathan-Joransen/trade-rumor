@@ -8,7 +8,7 @@ const options: NextAuthOptions = {
     },
   providers: [    
     CredentialsProvider({
-          name: 'Admin Signin',
+          name: 'Admin Login',
           credentials: {
           },
           async authorize(credentials, req) {
