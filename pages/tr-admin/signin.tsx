@@ -48,7 +48,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         return {
             props: {
                 session: JSON.parse(JSON.stringify(session)),
-                callbackUrl: JSON.parse(JSON.stringify(context.query["callbackUrl"] || "/"))
+                callbackUrl: JSON.parse(JSON.stringify(context.query["callbackUrl"] || "https://nbatradderumo.com/tr-admin"))
             }
         }
     }

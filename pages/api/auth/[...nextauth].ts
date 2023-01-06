@@ -17,8 +17,6 @@ const options: NextAuthOptions = {
             if(userName === "admin" && password === process.env.ADMIN_PASSWORD) {
               return JSON.parse(JSON.stringify({name: "Admin", role: "admin"}))
             }
-            
-            // Return null if user data could not be retrieved
             return null
           }
         })      
