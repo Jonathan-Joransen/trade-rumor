@@ -24,7 +24,7 @@ const options: NextAuthOptions = {
         })      
   ],
   pages: {
-    signIn: "/tr-admin",
+    signIn: "/tr-admin/signin",
   },
     callbacks: {
         jwt(params: any) {

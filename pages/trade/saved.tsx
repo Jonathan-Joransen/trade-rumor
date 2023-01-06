@@ -80,4 +80,6 @@ export const SavedTrades = () => {
     )
 }
 
+SavedTrades.auth = false;
+
 export default SavedTrades

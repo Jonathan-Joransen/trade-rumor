@@ -2,17 +2,17 @@ import { GetServerSideProps } from "next";
 import { getSession, signOut } from "next-auth/react";
 import Head from "next/head";
 import React, { useState } from "react";
-import Team from "../../../model/Team";
-import PlayerType from "../../../model/playerTypes";
-import TradeOrDisabledPlayerException, { TradeOrDisabledPlayerExceptionTypes } from "../../../model/TradeException";
-import styles from "../../../styles/EditTeam.module.css";
-import dashStyles from "../../../styles/Dashboard.module.css";
-import { RosterPlayer } from "../../../model/RosterPlayer";
-import { DraftPlayer } from "../../../model/DraftPlayer";
-import DashboardPlayer from "../../../components/dashboardPlayers";
-import Player from "../../../model/Player";
-import { DashboardExceptions } from "../../../components/dashboardException";
-import DatabaseClient from "../../../data/Database";
+import Team from "../../model/Team";
+import PlayerType from "../../model/playerTypes";
+import TradeOrDisabledPlayerException, { TradeOrDisabledPlayerExceptionTypes } from "../../model/TradeException";
+import styles from "../../styles/EditTeam.module.css";
+import dashStyles from "../../styles/Dashboard.module.css";
+import { RosterPlayer } from "../../model/RosterPlayer";
+import { DraftPlayer } from "../../model/DraftPlayer";
+import DashboardPlayer from "../../components/dashboardPlayers";
+import Player from "../../model/Player";
+import { DashboardExceptions } from "../../components/dashboardException";
+import DatabaseClient from "../../data/Database";
 import Link from "next/link";
 
 const EditTeam = ({ initialTeam }: { initialTeam: Team }) => {
@@ -132,7 +132,7 @@ const EditTeam = ({ initialTeam }: { initialTeam: Team }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <div className={dashStyles.header}>
-                <Link href="/tr-admin/dashboard"><h1>Dashboard</h1></Link>
+                <Link href="/tr-admin"><h1>Dashboard</h1></Link>
                 <button className={dashStyles.signOutButton} type="submit" onClick={() => handleSignOut()}>Log Out</button>
             </div>
       {team && (
@@ -385,17 +385,6 @@ const EditTeam = ({ initialTeam }: { initialTeam: Team }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const session = await getSession(context);
-
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/tr-admin",
-        permanent: false,
-      },
-    };
-  }
-
   const db = new DatabaseClient();
   let team = await db.GetTeam(context?.params?.teamName as string)
 
@@ -403,5 +392,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     props: { initialTeam: team },
   };
 };
+
+EditTeam.auth = true;
 
 export default EditTeam;

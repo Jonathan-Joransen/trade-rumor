@@ -123,4 +123,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
+Trade.auth = false;
+
 export default Trade;

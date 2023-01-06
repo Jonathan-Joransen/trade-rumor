@@ -2,7 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
 
-export default function Home() {
+export const Home = () => {
   return (
     <div className={styles.container}>
       <Head>
@@ -39,3 +39,7 @@ export default function Home() {
     </div>
   );
 }
+
+Home.auth = false;
+
+export default Home;

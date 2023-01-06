@@ -130,4 +130,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
+Trading.auth = false;
+
 export default Trading;
