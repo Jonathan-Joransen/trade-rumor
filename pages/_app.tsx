@@ -4,7 +4,7 @@ import { AppProps } from 'next/app'
 
 export default function App({ Component, pageProps }: AppProps) {
   return ( 
-  <SessionProvider session={pageProps.session}> 
+  <SessionProvider session={pageProps.session}  baseUrl="https://nbatraderumor.com"> 
         <Component {...pageProps} />
   </SessionProvider> 
   )
