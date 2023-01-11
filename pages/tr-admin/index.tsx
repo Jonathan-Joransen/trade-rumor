@@ -1,20 +1,35 @@
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DatabaseClient from '../../data/Database';
 import Team from '../../model/Team';
 import styles from '../../styles/Dashboard.module.css';
 import { signOut, useSession } from "next-auth/react"
+import { useRouter } from 'next/router';
 
 const Dashboard = ({initialTeams}: {initialTeams: Array<Team>}) => {
     const [teams, setTeams] = useState<Array<Team>>(initialTeams);
     const [showAddTeam, setShowAddTeam] = useState<boolean>(false);
-    const { status } = useSession({ required: true })
+    const [showPage, setShowPage] = useState<boolean>(false);
+    const router = useRouter();
 
-    if (status === "loading") {
-      return <div>Loading...</div>
-    }
+    // const { status } = useSession({ required: true })
+
+
+    // if (status === "loading") {
+    //   return <div>Loading...</div>
+    // }
+    useEffect(() => {
+        let data = localStorage.getItem('tr-admin');
+        if (!data) {
+            router.push('/tr-admin/signin');
+        }
+        else {
+            setShowPage(true);
+        }
+    }, []);
+
     let handleAddTeam = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         let teamName = e.currentTarget.teamName.value;
@@ -44,7 +59,9 @@ const Dashboard = ({initialTeams}: {initialTeams: Array<Team>}) => {
     }
 
     let handleSignOut = async () => {
-        await signOut({redirect: false});
+        localStorage.removeItem('tr-admin');
+        router.push('/tr-admin/signin');
+        // await signOut({redirect: false});
     };
     
     return (
@@ -58,46 +75,48 @@ const Dashboard = ({initialTeams}: {initialTeams: Array<Team>}) => {
                 />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
             </Head>
-            <div className={styles.header}>
-                <h1>Dashboard</h1>
-                <button className={styles.signOutButton} type="submit" onClick={() => handleSignOut()}>Log Out</button>
-            </div>
-            <div className={styles.teamsContainer}>
-                { teams && teams.map((team, idx) => {
-                    return (<Link href={`/tr-admin/${team.teamName}`} className={styles.teamButton} key={idx}>
-                                {team.teamName}
-                            </Link>)
-                })}
-            </div>
-            <button className={styles.addTeamButton} onClick={() => setShowAddTeam((prevTeam) => !prevTeam)}><img src="../images/plus (1) white.png"></img>New Team</button>
-            { showAddTeam &&
-                <div className={styles.teamFormContainer} >
-                <div className={styles.teamForm}>
-                <button className={styles.closeFormButton} onClick={() => setShowAddTeam(false)}><img src="../images/fail-x.png"></img></button>
-                <form className="form-group" onSubmit={handleAddTeam}>
-                    <h1>Add Team</h1>
-                    <label htmlFor="teamName">Team Name</label>
-                    <input className="form-control" type="text" name="teamName" id="teamName" />
-                    <label htmlFor="teamCity">Team City</label>
-                    <input className="form-control" type="text" name="teamCity" id="teamCity" />
-                    <label htmlFor="teamConference">Team Conference</label>
-                    <input className="form-control" type="text" name="teamConference" id="teamConference" />
-                    <label htmlFor="capSpace">Cap Space</label>
-                    <input className="form-control" type="number" name="capSpace" id="capSpace" />
-                    <label htmlFor="taxSpace">Tax Space</label>
-                    <input className="form-control" type="number" name="taxSpace" id="taxSpace" />
-                    <label htmlFor="hardCap">Hard Cap</label>
-                    <input className="form-control" type="text" placeholder='True or False' name="hardCap" id="hardCap" />
-                <button className="btn btn-primary" value="Submit">Add Team</button>
-                </form>
+            { showPage &&
+                <>
+                <div className={styles.header}>
+                    <h1>Dashboard</h1>
+                    <button className={styles.signOutButton} type="submit" onClick={() => handleSignOut()}>Log Out</button>
                 </div>
+                <div className={styles.teamsContainer}>
+                    { teams && teams.map((team, idx) => {
+                        return (<Link href={`/tr-admin/${team.teamName}`} className={styles.teamButton} key={idx}>
+                                    {team.teamName}
+                                </Link>)
+                    })}
                 </div>
+                <button className={styles.addTeamButton} onClick={() => setShowAddTeam((prevTeam) => !prevTeam)}><img src="../images/plus (1) white.png"></img>New Team</button>
+                { showAddTeam &&
+                    <div className={styles.teamFormContainer} >
+                    <div className={styles.teamForm}>
+                    <button className={styles.closeFormButton} onClick={() => setShowAddTeam(false)}><img src="../images/fail-x.png"></img></button>
+                    <form className="form-group" onSubmit={handleAddTeam}>
+                        <h1>Add Team</h1>
+                        <label htmlFor="teamName">Team Name</label>
+                        <input className="form-control" type="text" name="teamName" id="teamName" />
+                        <label htmlFor="teamCity">Team City</label>
+                        <input className="form-control" type="text" name="teamCity" id="teamCity" />
+                        <label htmlFor="teamConference">Team Conference</label>
+                        <input className="form-control" type="text" name="teamConference" id="teamConference" />
+                        <label htmlFor="capSpace">Cap Space</label>
+                        <input className="form-control" type="number" name="capSpace" id="capSpace" />
+                        <label htmlFor="taxSpace">Tax Space</label>
+                        <input className="form-control" type="number" name="taxSpace" id="taxSpace" />
+                        <label htmlFor="hardCap">Hard Cap</label>
+                        <input className="form-control" type="text" placeholder='True or False' name="hardCap" id="hardCap" />
+                    <button className="btn btn-primary" value="Submit">Add Team</button>
+                    </form>
+                    </div>
+                    </div>
+                }
+                </>
             }
         </div>
     );
 };
-
-Dashboard.auth = true;
 
 export default Dashboard;
 
