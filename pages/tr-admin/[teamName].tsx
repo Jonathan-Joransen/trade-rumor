@@ -112,7 +112,7 @@ const EditTeam = ({ initialTeam }: { initialTeam: Team }) => {
         let hardCap = e.currentTarget.hardCap.value === "true" ? true : false;
         let taxApron = Number(e.currentTarget.taxSpace.value) + Number(6000000);
         await setTeam((prevTeam) => {
-            let newTeam = { ...prevTeam, teamName: teamName, teamCity: teamCity, teamConference: teamConference, capSpace: capSpace, taxSpace: taxSpace, hardCap: hardCap, taxApron: taxApron };
+            let newTeam = { ...prevTeam, teamName: teamName, teamCity: teamCity, teamConference: teamConference, capSpace: Number(capSpace), taxSpace: Number(taxSpace), hardCap: hardCap, taxApron: taxApron };
             editTeam(newTeam);
             return newTeam;
         });
