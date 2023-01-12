@@ -106,7 +106,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       let allTeams = await db.GetTeams();
 
       let westTeams = allTeams.filter((team: Team) => team.conference.toLocaleLowerCase() === "west")
+      .sort((a: Team, b: Team) => (a.city > b.city ? 1 : -1))
       let eastTeam = allTeams.filter((team: Team) => team.conference.toLocaleLowerCase() === "east")
+      .sort((a: Team, b: Team) => (a.city > b.city ? 1 : -1))
 
     return {
       props: {
@@ -122,7 +124,5 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
   };
 };
-
-Trade.auth = false;
 
 export default Trade;
