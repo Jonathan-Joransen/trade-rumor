@@ -53,8 +53,10 @@ const EditTeam = ({ initialTeam }: { initialTeam: Team }) => {
 
   let addPlayer = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(e.currentTarget.teamsCannotBeTradedTo.value)
     let teamsCannotBeTradedTo =
-      e.currentTarget.teamsCannotBeTradedTo.value === undefined
+      e.currentTarget.teamsCannotBeTradedTo.value === undefined ||
+      e.currentTarget.teamsCannotBeTradedTo.value === ""
         ? []
         : e.currentTarget.teamsCannotBeTradedTo.value.split(",");
     let player = new RosterPlayer(
