@@ -39,14 +39,14 @@ export const DashboardPlayer = ({initPlayer, deletePlayer}: {initPlayer: Player,
             <div className={styles.playerStat} >Incoming: {asCurrency(Number(rosterPlayer.incomingSalary))}</div>
             <div className={styles.playerStat} >Outgoing: {asCurrency(Number(rosterPlayer.outgoingSalary))}</div>
             <div className={styles.playerStat} >Trade Kicker: {asCurrency(Number(rosterPlayer.tradeKicker))}</div>
-            <div className={styles.playerStat} >Can't Trade Until: {rosterPlayer.cannotTradeUntilDate}</div>
-            <div className={styles.playerStat} >Can't Trade With Others: {rosterPlayer.cannotTradeWithOtherPlayersUntilDate}</div>
-            <div className={styles.playerStat} >Two Way: {rosterPlayer.isTwoWay}</div>
-            <div className={styles.playerStat} >Poison Pill: {rosterPlayer.isPoisonPill}</div>
-            <div className={styles.playerStat} >Upcoming Free Agent: {rosterPlayer.isUpcomingFreeAgent}</div>
-            <div className={styles.playerStat} >Player Option: {rosterPlayer.hasPlayerOption}</div>
-            <div className={styles.playerStat} >Team Option: {rosterPlayer.hasTeamOption}</div>
-            <div className={styles.playerStat} >Teams Can't Be Traded To: {rosterPlayer.teamsCannotBeTradedTo}</div>
+            <div className={styles.playerStat} >Can't Trade Until: {String(rosterPlayer.cannotTradeUntilDate)}</div>
+            <div className={styles.playerStat} >Can't Trade With Others: {String(rosterPlayer.cannotTradeWithOtherPlayersUntilDate)}</div>
+            <div className={styles.playerStat} >Two Way: {String(rosterPlayer.isTwoWay)}</div>
+            <div className={styles.playerStat} >Poison Pill: {String(rosterPlayer.isPoisonPill)}</div>
+            <div className={styles.playerStat} >Upcoming Free Agent: {String(rosterPlayer.isUpcomingFreeAgent)}</div>
+            <div className={styles.playerStat} >Player Option: {String(rosterPlayer.hasPlayerOption)}</div>
+            <div className={styles.playerStat} >Team Option: {String(rosterPlayer.hasTeamOption)}</div>
+            <div className={styles.playerStat} >Teams Can't Be Traded To: {rosterPlayer.teamsCannotBeTradedTo.join(", ")}</div>
         </div>
         )}
         {draftPlayer && (
