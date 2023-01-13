@@ -55,7 +55,7 @@ const EditTeam = ({ initialTeam }: { initialTeam: Team }) => {
     e.preventDefault();
     let teamsCannotBeTradedTo =
       e.currentTarget.teamsCannotBeTradedTo.value === undefined
-        ? ""
+        ? []
         : e.currentTarget.teamsCannotBeTradedTo.value.split(",");
     let player = new RosterPlayer(
       e.currentTarget.firstName.value,
