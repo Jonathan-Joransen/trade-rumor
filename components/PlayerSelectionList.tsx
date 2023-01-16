@@ -125,6 +125,27 @@ export const PlayerSelectionList = ({
     // Handle teams option
     if (!isPlayerAlreadySelected &&
       player.playerType === PlayerType.RosterPlayer &&
+      (player as RosterPlayer).isUpcomingFreeAgent === true)
+    {
+      let rosterPlayer = player as RosterPlayer;
+      let teamOptionUserInput = await getPopUpUserInput(
+        new PopUpOptions("Upcoming Free Agent",
+          `${rosterPlayer.firstName} ${rosterPlayer.lastName} is an upcoming free agent and cannot be traded.`,
+          ["Cancel", "OK"],
+          updatePopUpUserInput));
+          if (teamOptionUserInput === "Cancel") {
+            return el.classList.remove(styles.selectedPlayer);
+          }
+          if (teamOptionUserInput === "OK" 
+          && teamNames.length === 2 
+          && rosterPlayer.teamsCannotBeTradedTo.includes(teamNames.filter((t) => t !== player.teamName)[0])) {
+            return el.classList.remove(styles.selectedPlayer);
+          }
+    }
+
+    // Handle teams option
+    if (!isPlayerAlreadySelected &&
+      player.playerType === PlayerType.RosterPlayer &&
       (player as RosterPlayer).hasTeamOption === true)
     {
       let rosterPlayer = player as RosterPlayer;
