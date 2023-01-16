@@ -114,6 +114,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
     for(let team of teams) {
       team.players.push(new Cash(team.teamName))
+      team.players.sort((a, b) => a.incomingSalary > b.incomingSalary ? -1 : 1)
     }
     
     return {

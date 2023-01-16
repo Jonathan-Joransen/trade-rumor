@@ -76,7 +76,7 @@ export class Trade {
 
         let isTaxApronValid = this._isTaxApronValid(incomingSalary, outgoingSalary, team)
         if (!isTaxApronValid) {
-            this.failedReasonMessage = `${team.teamName} are over their tax apron by $${(incomingSalary - outgoingSalary - team.taxApron)}`
+            this.failedReasonMessage = `For trade to work ${team.teamName} must remove $${(incomingSalary - outgoingSalary - team.taxApron)} from their incoming salary.`
             return false
         }
 
@@ -87,7 +87,7 @@ export class Trade {
             let isTaxSpaceValid = this._isTaxSpaceValid(incomingSalary, outgoingSalary, team)
             // If tax space is not valid for any team, the whole trade is invalid
             if (!isTaxSpaceValid) {
-                this.failedReasonMessage = `${team.teamName} are over their tax space by $${(incomingSalary - outgoingSalary - team.taxSpace)}`
+                this.failedReasonMessage = `For trade to work ${team.teamName} must remove $${(incomingSalary - outgoingSalary - team.taxSpace)} from their incoming salary.`
                 return this._isTeamValidWithTradeExceptions(team, incomingPlayers)
             }
         }
@@ -130,12 +130,12 @@ export class Trade {
 
     _isCapSpaceValid(outgoingSalary: number, incomingSalary: number, team: Team, incomingPlayers: PlayerInTrade[]) {
         if (team.capSpace < 0) {
-            this.failedReasonMessage = `${team.teamName} are over their cap space by $${(incomingSalary - outgoingSalary - team.capSpace)}`
+            this.failedReasonMessage = `For trade to work ${team.teamName} must remove $${(incomingSalary - outgoingSalary - team.capSpace)} from their incoming salary.`
             return false
         }
 
         if (incomingSalary - outgoingSalary > team.capSpace) {
-            this.failedReasonMessage = `${team.teamName} are over their cap space by $${(incomingSalary - outgoingSalary - team.capSpace)}`
+            this.failedReasonMessage = `For trade to work ${team.teamName} must remove $${(incomingSalary - outgoingSalary - team.capSpace)} from their incoming salary.`
             return this._isCapSpaceExceptionValid(outgoingSalary + team.capSpace, incomingPlayers, team)
         }
         return true
