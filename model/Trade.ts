@@ -173,7 +173,7 @@ export class Trade {
         }
 
         // The function should never get here
-        throw new Error('[Error] Something went wrong when validating tax space')
+        throw new Error(`[Error] Something went wrong when validating tax space for ${team.teamName} with outgoing salary ${outgoingSalary} and incoming salary ${incomingSalary}`)
     }
 
     _isTaxApronValid(incomingSalary: number, outgoingSalary: number, team: Team) {
