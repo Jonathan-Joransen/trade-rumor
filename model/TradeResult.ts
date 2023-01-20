@@ -22,6 +22,6 @@ export default class TradeResult {
         })
         let date = new Date()
         id += `${date.getMonth()}${date.getDay()}${date.getFullYear()}`
-        return id
+        return encodeURIComponent(id)
     }
 }
