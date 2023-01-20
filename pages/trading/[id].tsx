@@ -27,7 +27,8 @@ export const TradeResultsFromId = ({tradeResult}: {tradeResult: TradeResult}) =>
         router.push({
             pathname: "/trading",
             query: {
-                teamNames: JSON.stringify(tradeResult.trade.teams.map(team => team.teamName))
+                teamNames: JSON.stringify(tradeResult.trade.teams.map(team => team.teamName)),
+                tradeId: tradeResult.id
             }
         });
     }

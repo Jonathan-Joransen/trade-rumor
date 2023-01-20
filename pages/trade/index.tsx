@@ -10,7 +10,7 @@ import Database from "../../data/Database";
 const Trade = ({
   westTeams,
   eastTeams,
-  selectedTeamNames,
+  selectedTeamNames
 }: {
   westTeams: Array<Team>;
   eastTeams: Array<Team>;
@@ -109,12 +109,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       .sort((a: Team, b: Team) => (a.city > b.city ? 1 : -1))
       let eastTeam = allTeams.filter((team: Team) => team.conference.toLocaleLowerCase() === "east")
       .sort((a: Team, b: Team) => (a.city > b.city ? 1 : -1))
-
+      
     return {
       props: {
         westTeams: JSON.parse(JSON.stringify(westTeams)),
         eastTeams: JSON.parse(JSON.stringify(eastTeam)),
-        selectedTeamNames: JSON.parse(JSON.stringify(teamNames)),
+        selectedTeamNames: JSON.parse(JSON.stringify(teamNames))
       },
     }
   } catch (error) {

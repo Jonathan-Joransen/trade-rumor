@@ -2,6 +2,7 @@ import Trade from "./Trade";
 
 export default class TradeResult {
     id: string
+    date: string
     trade: Trade
     isTradeValid: boolean
     tradeFailedReason: string
@@ -9,6 +10,7 @@ export default class TradeResult {
         this.trade = this._removeExtraDateFromTrade(trade)
         this.isTradeValid = isTradeValid
         this.tradeFailedReason = tradeFailedReason
+        this.date = Date.now().toString()
         this.id = this._generateId(trade)
     }
 
@@ -16,9 +18,8 @@ export default class TradeResult {
         let id = ''
         trade.teams.sort((team1, team2) => team1.teamName[0].localeCompare(team2.teamName[0])).forEach(t => {
             id += t.teamName
-        })
-        
-        id +=  Date.now().toString()
+        })        
+        id +=  this.date
         return encodeURIComponent(id)
     }
 

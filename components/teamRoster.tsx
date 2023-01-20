@@ -43,7 +43,7 @@ export const TeamRoster = ({
   // Set DraftPlayers
   let draftPlayers: DraftPlayer[] = players.filter(
     (player) => player.playerType === PlayerType.DraftPlayer
-  ).sort((a,b) => a.playerName > b.playerName ? -1 : 1) as DraftPlayer[];
+  ).sort((a,b) => a.playerName > b.playerName ? 1 : -1) as DraftPlayer[];
   let draftRights = draftPlayers.filter(
     (player) =>
       player.playerType === PlayerType.DraftPlayer && player.isDraftRights

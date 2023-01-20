@@ -18,6 +18,10 @@ export class Trade {
     oneHundredThousand = 100000
     fiveMillion = 5000000
 
+    asMillions = (salary: number) => {
+        return `$${(salary / 1000000).toFixed(1)}M`;
+      };
+
     isValidTrade() {
         if (this.playersInTrade.length < 2) {
             this.failedReasonMessage = 'A trade must have at least 2 players'
@@ -76,7 +80,7 @@ export class Trade {
 
         let isTaxApronValid = this._isTaxApronValid(incomingSalary, outgoingSalary, team)
         if (!isTaxApronValid) {
-            this.failedReasonMessage = `For trade to work ${team.teamName} must remove $${(incomingSalary - outgoingSalary - team.taxApron)} from their incoming salary.`
+            this.failedReasonMessage = `For trade to work ${team.teamName} must remove ${this.asMillions((incomingSalary - outgoingSalary - team.taxApron))} from their incoming salary.`
             return false
         }
 
@@ -87,7 +91,7 @@ export class Trade {
             let isTaxSpaceValid = this._isTaxSpaceValid(incomingSalary, outgoingSalary, team)
             // If tax space is not valid for any team, the whole trade is invalid
             if (!isTaxSpaceValid) {
-                this.failedReasonMessage = `For trade to work ${team.teamName} must remove $${(incomingSalary - outgoingSalary - team.taxSpace)} from their incoming salary.`
+                this.failedReasonMessage = `For trade to work ${team.teamName} must remove ${this.asMillions((incomingSalary - outgoingSalary - team.taxSpace))} from their incoming salary.`
                 return this._isTeamValidWithTradeExceptions(team, incomingPlayers)
             }
         }
@@ -130,12 +134,12 @@ export class Trade {
 
     _isCapSpaceValid(outgoingSalary: number, incomingSalary: number, team: Team, incomingPlayers: PlayerInTrade[]) {
         if (team.capSpace < 0) {
-            this.failedReasonMessage = `For trade to work ${team.teamName} must remove $${(incomingSalary - outgoingSalary - team.capSpace)} from their incoming salary.`
+            this.failedReasonMessage = `For trade to work ${team.teamName} must remove ${this.asMillions((incomingSalary - outgoingSalary - team.capSpace))} from their incoming salary.`
             return false
         }
 
         if (incomingSalary - outgoingSalary > team.capSpace) {
-            this.failedReasonMessage = `For trade to work ${team.teamName} must remove $${(incomingSalary - outgoingSalary - team.capSpace)} from their incoming salary.`
+            this.failedReasonMessage = `For trade to work ${team.teamName} must remove ${this.asMillions((incomingSalary - outgoingSalary - team.capSpace))} from their incoming salary.`
             return this._isCapSpaceExceptionValid(outgoingSalary + team.capSpace, incomingPlayers, team)
         }
         return true

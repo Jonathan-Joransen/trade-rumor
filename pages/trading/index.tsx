@@ -1,6 +1,6 @@
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Header } from "../../components/header";
 import { TeamPreview } from "../../components/teamPreview";
 import TeamRoster from "../../components/teamRoster";
@@ -10,21 +10,21 @@ import { PlayerInTrade } from "../../model/PlayerInTrade";
 import Team from "../../model/Team";
 import styles from "../../styles/Trading.module.css";
 
-export const Trading = ({ teams }: { teams: Team[] }): React.ReactNode => {
+export const Trading = ({ teams }: { teams: Team[]}): React.ReactNode => {
   let router = useRouter();
   const [selectedPlayers, setSelectedPlayers] = useState(new Array<PlayerInTrade>());
   const [activeTeams, setActiveTeams] = useState(teams);
 
   const teamNames = teams.map((team) => team.teamName);
-    
+
   let handleChangeTeams = () => {
-      router.push({
-          pathname: "/trade",
-          query: { 
-              teamNames: JSON.stringify(teamNames) 
-          },
-      });
-  }
+    router.push({
+      pathname: "/trade",
+      query: {
+        teamNames: JSON.stringify(teamNames),
+      },
+    });
+  };
 
   let addSelectedPlayer = (player: PlayerInTrade) => {
     setSelectedPlayers((prev: PlayerInTrade[]) => {
@@ -35,30 +35,29 @@ export const Trading = ({ teams }: { teams: Team[] }): React.ReactNode => {
 
   let removeSelectedPlayer = (player: PlayerInTrade) => {
     setSelectedPlayers((prev: PlayerInTrade[]) => {
-      return prev.filter((p) => (p.player !== player.player));
+      return prev.filter((p) => p.player !== player.player);
     });
   };
 
   let tryTrade = async () => {
-    let response = await fetch('/api/trade', {
-      method: 'POST',
+    let response = await fetch("/api/trade", {
+      method: "POST",
       headers: {
-          'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         teams: activeTeams,
-        players: selectedPlayers
-      })
-  })
+        players: selectedPlayers,
+      }),
+    });
 
-  if(response.status === 200) {
-    let data = await response.json();
-    router.push({pathname: "/trading/" + data.tradeId});
-  } else {
-    alert("Trade not valid. Something went wrong.");
-  }
-}
-
+    if (response.status === 200) {
+      let data = await response.json();
+      router.push({ pathname: "/trading/" + data.tradeId });
+    } else {
+      alert("Trade not valid. Something went wrong.");
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -66,7 +65,7 @@ export const Trading = ({ teams }: { teams: Team[] }): React.ReactNode => {
         buttonProps={{
           text: "Change Teams",
           icon: "../images/retweet-white.png",
-          onClick: handleChangeTeams
+          onClick: handleChangeTeams,
         }}
       ></Header>
       <div className={styles.teamsContainer} data-teams={teams.length}>
@@ -99,7 +98,9 @@ export const Trading = ({ teams }: { teams: Team[] }): React.ReactNode => {
         )}
       </div>
       <div className={styles.buttonContainer}>
-        <button className={styles.tradeButton} onClick={() => tryTrade()}>Try Trade</button>
+        <button className={styles.tradeButton} onClick={() => tryTrade()}>
+          Try Trade
+        </button>
       </div>
     </div>
   );
@@ -116,24 +117,25 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       teamNames.includes(team.teamName)
     );
 
-    for(let team of teams) {
-      team.players.push(new Cash(team.teamName))
-      team.players.sort((a, b) => a.incomingSalary > b.incomingSalary ? -1 : 1)
-      team.tradeExceptions.sort((a, b) => a.ammount > b.ammount ? -1 : 1)
+    for (let team of teams) {
+      team.players.push(new Cash(team.teamName));
+      team.players.sort((a, b) =>
+        a.incomingSalary > b.incomingSalary ? -1 : 1
+      );
+      team.tradeExceptions.sort((a, b) => (a.ammount > b.ammount ? -1 : 1));
     }
     
     return {
       props: {
-        teams: JSON.parse(JSON.stringify(teams)),
+        teams: JSON.parse(JSON.stringify(teams))
       },
     };
-  } 
-  catch (error) {
-      console.log(error);
-      return {
-          notFound: true,
-      }
-  };
+  } catch (error) {
+    console.log(error);
+    return {
+      notFound: true,
+    };
+  }
 };
 
 Trading.auth = false;
