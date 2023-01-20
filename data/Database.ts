@@ -54,11 +54,13 @@ export default class DatabaseClient {
 
     async GetTeamsWithoutPlayers(): Promise<Team[]> {
         let data = await fs.readFileSync(`${process.env.DATA_PATH}/teams.json`,  'utf8');
-        let teams = JSON.parse(data)
-        for(var team of teams) {
+        let teamsRaw = JSON.parse(data)
+        let teams: Team[] = []
+        for(var team of teamsRaw) {
             team.players = []
+            teams.push(team)
         }
-        return JSON.parse(teams)
+        return teams
     }
 
     async GetTeam(teamName: string): Promise<Team> {
