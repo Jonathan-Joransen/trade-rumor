@@ -6,7 +6,7 @@ export default class TradeResult {
     isTradeValid: boolean
     tradeFailedReason: string
     constructor(trade: Trade, isTradeValid: boolean, tradeFailedReason: string) {
-        this.trade = trade
+        this.trade = this._removeExtraDateFromTrade(trade)
         this.isTradeValid = isTradeValid
         this.tradeFailedReason = tradeFailedReason
         this.id = this._generateId(trade)
@@ -23,5 +23,12 @@ export default class TradeResult {
         let date = new Date()
         id += `${date.getMonth()}${date.getDay()}${date.getFullYear()}`
         return encodeURIComponent(id)
+    }
+
+    _removeExtraDateFromTrade(trade: Trade): Trade {
+        trade.teams.forEach(team => {
+            team.players = []
+        })
+        return trade
     }
 }
