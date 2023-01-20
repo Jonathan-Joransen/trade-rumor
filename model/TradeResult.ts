@@ -17,8 +17,8 @@ export default class TradeResult {
         trade.teams.sort((team1, team2) => team1.teamName[0].localeCompare(team2.teamName[0])).forEach(t => {
             id += t.teamName
         })
-        let date = new Date()
-        id += date
+        
+        id +=  Date.now().toString()
         return encodeURIComponent(id)
     }
 
