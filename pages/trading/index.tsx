@@ -53,7 +53,9 @@ export const Trading = ({ teams }: { teams: Team[]}): React.ReactNode => {
 
     if (response.status === 200) {
       let data = await response.json();
-      router.push({ pathname: "/trading/" + data.tradeId });
+      router.push({
+         pathname: "/trading/" + data.tradeId
+      });
     } else {
       alert("Trade not valid. Something went wrong.");
     }

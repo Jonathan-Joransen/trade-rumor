@@ -103,7 +103,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     );
       
       const db = new Database();
-      let allTeams = await db.GetTeams();
+      let allTeams = await db.GetTeamsWithoutPlayers();
 
       let westTeams = allTeams.filter((team: Team) => team.conference.toLocaleLowerCase() === "west")
       .sort((a: Team, b: Team) => (a.city > b.city ? 1 : -1))

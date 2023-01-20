@@ -52,6 +52,15 @@ export default class DatabaseClient {
         return JSON.parse(data)
     }
 
+    async GetTeamsWithoutPlayers(): Promise<Team[]> {
+        let data = await fs.readFileSync(`${process.env.DATA_PATH}/teams.json`,  'utf8');
+        let teams = JSON.parse(data)
+        for(var team of teams) {
+            team.players = []
+        }
+        return JSON.parse(teams)
+    }
+
     async GetTeam(teamName: string): Promise<Team> {
         let teams = await this.GetTeams()
         return teams.find(t => t.teamName.toLowerCase() === teamName.toLowerCase()) as Team
