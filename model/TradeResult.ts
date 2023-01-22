@@ -1,4 +1,5 @@
 import Trade from "./Trade";
+import { uuid } from 'uuidv4';
 
 export default class TradeResult {
     id: string
@@ -15,12 +16,7 @@ export default class TradeResult {
     }
 
     _generateId(trade: Trade): string {
-        let id = ''
-        trade.teams.sort((team1, team2) => team1.teamName[0].localeCompare(team2.teamName[0])).forEach(t => {
-            id += t.teamName
-        })        
-        id +=  this.date
-        return encodeURIComponent(id)
+        return uuid()
     }
 
     _removeExtraDateFromTrade(trade: Trade): Trade {
