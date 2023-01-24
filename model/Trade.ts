@@ -80,6 +80,7 @@ export class Trade {
 
         let isTaxApronValid = this._isTaxApronValid(incomingSalary, outgoingSalary, team)
         if (!isTaxApronValid) {
+            console.log("tax apron not valid")
             this.failedReasonMessage = `For trade to work ${team.teamName} must remove ${this.asMillions((incomingSalary - outgoingSalary - team.taxApron))} from their incoming salary.`
             return false
         }
@@ -150,7 +151,7 @@ export class Trade {
 
         // If the pre trade tax space is negative, the trade max incoming salary is 125% of outgoing salary plus 100k
         // If the outgoingSalary is over $19,600,000, the trade max incoming salary is 125% of outgoing salary plus 100k
-        if (afterTradeTaxSpace < 0 || outgoingSalary > 19600000) {
+        if (afterTradeTaxSpace > 0 || outgoingSalary > 19600000) {
             return incomingSalary <= (outgoingSalary * 1.25) + this.oneHundredThousand
         }
 
