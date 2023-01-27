@@ -1,4 +1,5 @@
 import { GetServerSideProps } from "next";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import React from "react";
 import { Header } from "../../components/header";
@@ -58,6 +59,13 @@ export const TradeResultsFromId = ({
 
   return (
     <div className={styles.container}>
+      <Head>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2792567691913768"
+          crossOrigin="anonymous"
+        ></script>
+      </Head>
       <Header
         buttonProps={{
           text: "View Saved",
