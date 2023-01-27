@@ -113,7 +113,7 @@ export const TradeResultsFromId = ({
                 <TeamPreview
                   team={team}
                   selectedPlayers={tradeResult.trade.playersInTrade.filter(
-                    (player) => player.toTeamName == team.teamName
+                    (player) => player.toTeamName == team.teamName || player.fromTeamName == team.teamName
                   )}
                 />
               </div>
