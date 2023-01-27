@@ -1,5 +1,6 @@
 import { resolve } from "path";
 import React, { useEffect } from "react";
+import { DraftPlayer } from "../model/DraftPlayer";
 import Player from "../model/Player";
 import { PlayerInTrade } from "../model/PlayerInTrade";
 import PlayerType from "../model/playerTypes";
@@ -189,6 +190,19 @@ export const PlayerSelectionList = ({
         toTeam = await getPopUpUserInput(
           new PopUpOptions("Select Team", "Select the team to trade to", teamNamesToShow, updatePopUpUserInput));
       }  
+    }
+
+    // Handle draft player protection
+    if (!isPlayerAlreadySelected &&
+      player.playerType === PlayerType.DraftPlayer &&
+      (player as DraftPlayer).canProtect === true)
+    {
+      let protectionLevel = await getPopUpUserInput(
+        new PopUpOptions("Protect Draft Pick",
+          "Select a protection level for the draft pick",
+          ["Unprotected", "Top 4", "Top 5", "Top 8", "Top 10", "Lottery", "Top 20"],
+          updatePopUpUserInput));
+        (player as DraftPlayer).protectionLevel = protectionLevel;
     }
 
     if (isPlayerAlreadySelected && player.playerName !== "Cash") {

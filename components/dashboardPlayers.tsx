@@ -53,6 +53,8 @@ export const DashboardPlayer = ({initPlayer, deletePlayer}: {initPlayer: Player,
         <div className={styles.player}>
             <div className={styles.playerStat} >Name:</div>
             <div className={styles.playerStat} > {draftPlayer.firstName}</div>
+            {draftPlayer.isDraftPick && <div className={styles.playerStat} >Can Protect:</div>}
+            {draftPlayer.isDraftPick && <div className={styles.playerStat} > {draftPlayer?.canProtect === true ? "True" : "False" ?? "None"}</div>}
         </div>
         )}
         <button className={styles.deleteButton} onClick={() => handleDelete()}>Delete Player</button>

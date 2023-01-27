@@ -58,4 +58,15 @@
 .profileImage {
     max-width: 3rem;
     border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.draftProtectionLevel {
+    text-align: center;
+    font-weight: 500;
+    background-color: #131313;
+    border-radius: 5px;
 }

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { DraftPlayer } from "../model/DraftPlayer";
 import { PlayerInTrade } from "../model/PlayerInTrade";
 import PlayerType from "../model/playerTypes";
 import Team from "../model/Team";
@@ -20,6 +21,8 @@ export const TeamPreview = ({
     for (let playerInTrade of selectedPlayers) {
       if (playerInTrade.toTeamName === team.teamName) {
         ammount += playerInTrade.player.incomingSalary;
+      }
+      if (playerInTrade.fromTeamName === team.teamName) {
         outgoingAmount += playerInTrade.player.outgoingSalary;
       }
     }
@@ -68,9 +71,15 @@ export const TeamPreview = ({
                   ></img>
                   <div className={styles.playerName}>
                     {
-                    playerInTrade.player.playerType === PlayerType.RosterPlayer ?
-                    `${playerInTrade.player.firstName[0]}. ${playerInTrade.player.lastName}` :
-                    `${playerInTrade.player.playerName}`
+                      playerInTrade.player.playerType === PlayerType.RosterPlayer &&
+                      `${playerInTrade.player.firstName[0]}. ${playerInTrade.player.lastName}`
+                    }
+                    {
+                      playerInTrade.player.playerType !== PlayerType.RosterPlayer && `${playerInTrade.player.playerName.substring(0, 15)}${playerInTrade.player.playerName.substring(0, 15).length === 15 ? "..." : ""}`
+                    }
+                    {
+                      playerInTrade.player.playerType === PlayerType.DraftPlayer && (playerInTrade.player as DraftPlayer).isDraftPick  &&
+                        <div className={styles.draftProtectionLevel}>{(playerInTrade.player as DraftPlayer).protectionLevel}</div>
                     }
                   </div>
                 </div>

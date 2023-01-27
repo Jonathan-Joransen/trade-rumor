@@ -143,7 +143,8 @@ const EditTeam = ({ initialTeam }: { initialTeam: Team }) => {
     let draftPlayer = new DraftPlayer(
       e.currentTarget.playerName.value,
       team.teamName,
-      isDraftPick
+      isDraftPick,
+      e.currentTarget.canProtect.value === "true" ? true : false,
     );
 
     await setTeam((prevTeam) => {
@@ -385,6 +386,15 @@ const EditTeam = ({ initialTeam }: { initialTeam: Team }) => {
                       <option value={"DraftRights"}>
                         Draft Rights To Player
                       </option>
+                    </select>
+                    <label htmlFor="canProtect">Can Protect</label>
+                    <select
+                      className="form-control"
+                      name="canProtect"
+                      id="canProtect"
+                    >
+                      <option value={"true"}>True</option>
+                      <option value={"false"}>False</option>
                     </select>
                     <button className="btn btn-primary" value="Submit">
                       Add Draft Player
