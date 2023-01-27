@@ -7,6 +7,8 @@ export const Home = () => {
     <div className={styles.container}>
       <Head>
         <title>NBA Trade Rumor</title>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2792567691913768"crossOrigin="anonymous">
+        </script>
         <meta
           name="description"
           content="See if NBA trades work using up to date live data."

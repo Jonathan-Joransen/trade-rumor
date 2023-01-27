@@ -11,16 +11,20 @@ export const TeamPreview = ({
   team: Team;
   selectedPlayers: PlayerInTrade[];
 }) => {
-  const [acquiringAmmount, setAcquiringAmmount] = useState(0);
+  const [acquiringAmount, setAcquiringAmount] = useState(0);
+  const [outgoingAmount, setOutgoingAmount] = useState(0);
 
   useEffect(() => {
     let ammount = 0;
+    let outgoingAmount = 0;
     for (let playerInTrade of selectedPlayers) {
       if (playerInTrade.toTeamName === team.teamName) {
         ammount += playerInTrade.player.incomingSalary;
+        outgoingAmount += playerInTrade.player.outgoingSalary;
       }
     }
-    setAcquiringAmmount(ammount);
+    setOutgoingAmount(outgoingAmount);
+    setAcquiringAmount(ammount);
   }, [selectedPlayers]);
 
   let asCurrency = (num: number): string => {
@@ -45,7 +49,10 @@ export const TeamPreview = ({
           Tax Space: {asCurrency(Number(team.taxSpace))}
         </div>
         <div className={styles.teamStat}>
-          Acquiring: {asCurrency(Number(acquiringAmmount))}
+          Incoming: {asCurrency(Number(acquiringAmount))}
+        </div>
+        <div className={styles.teamStat}>
+          Outgoing: {asCurrency(Number(outgoingAmount))}
         </div>
       </div>
       <div className={styles.playerContainer}>
