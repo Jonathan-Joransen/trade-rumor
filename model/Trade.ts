@@ -155,7 +155,7 @@ export class Trade {
         if (afterTradeTaxSpace > 0 || outgoingSalary > 19600000) {
             let isTaxSpaceValid = incomingSalary <= (outgoingSalary * 1.25) + this.oneHundredThousand
             if (!isTaxSpaceValid) {
-                this.failedReasonMessage = `For trade to work ${team.teamName} must remove ${this.asMillions((incomingSalary - (outgoingSalary * 1.25) + this.oneHundredThousand))} from their incoming salary.`
+                this.failedReasonMessage = `For trade to work ${team.teamName} must remove ${this.asMillions((incomingSalary - ((outgoingSalary * 1.25) + this.oneHundredThousand)))} from their incoming salary.`
             }
             return isTaxSpaceValid
         }

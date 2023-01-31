@@ -89,6 +89,6 @@ describe("Trade failed reason is correct", () => {
         let trade = new Trade(playersInTrade, teams);
         let isValid = trade.isValidTrade();
         console.log(trade.failedReasonMessage)
-       expect(trade.failedReasonMessage).toBe("For trade to work Warriors must remove $33.6M from their incoming salary.");
+       expect(trade.failedReasonMessage).toBe("For trade to work Warriors must remove $33.4M from their incoming salary.");
     });
 });
