@@ -90,9 +90,10 @@ export class Trade {
         // If cap space is not valid, check if tax space is valid
         if (!isCapSpaceValid) {
             let isTaxSpaceValid = this._isTaxSpaceValid(incomingSalary, outgoingSalary, team)
+            console.log(`isTaxSpaceValid: ${isTaxSpaceValid}`)
+            console.log(`incomingSalary: ${incomingSalary} outgoingSalary: ${outgoingSalary} team.taxSpace: ${team.taxSpace}`)
             // If tax space is not valid for any team, the whole trade is invalid
             if (!isTaxSpaceValid) {
-                this.failedReasonMessage = `For trade to work ${team.teamName} must remove ${this.asMillions((incomingSalary - outgoingSalary - team.taxSpace))} from their incoming salary.`
                 return this._isTeamValidWithTradeExceptions(team, incomingPlayers)
             }
         }
@@ -152,7 +153,11 @@ export class Trade {
         // If the pre trade tax space is negative, the trade max incoming salary is 125% of outgoing salary plus 100k
         // If the outgoingSalary is over $19,600,000, the trade max incoming salary is 125% of outgoing salary plus 100k
         if (afterTradeTaxSpace > 0 || outgoingSalary > 19600000) {
-            return incomingSalary <= (outgoingSalary * 1.25) + this.oneHundredThousand
+            let isTaxSpaceValid = incomingSalary <= (outgoingSalary * 1.25) + this.oneHundredThousand
+            if (!isTaxSpaceValid) {
+                this.failedReasonMessage = `For trade to work ${team.teamName} must remove ${this.asMillions((incomingSalary - (outgoingSalary * 1.25) + this.oneHundredThousand))} from their incoming salary.`
+            }
+            return isTaxSpaceValid
         }
 
         // Handle when outgoing salary is between $0 and $6,533,333 and the pre trade tax space is positive
@@ -161,9 +166,17 @@ export class Trade {
             // The max incoming salary is the greater of 125% of the outgoing salary plus 100k and the outgoing salary plus the tax space 
             if ((outgoingSalary * 1.75) + this.oneHundredThousand - afterTradeTaxSpace < 0) {
                 let maxIncomingSalary = Math.max(outgoingSalary + afterTradeTaxSpace, (outgoingSalary * 1.25) + this.oneHundredThousand)
-                return incomingSalary <= maxIncomingSalary
+                let isTaxSpaceValid = incomingSalary <= maxIncomingSalary
+                if (!isTaxSpaceValid) {
+                    this.failedReasonMessage = `For trade to work ${team.teamName} must remove ${this.asMillions((incomingSalary - maxIncomingSalary))} from their incoming salary.`
+                }
+                return isTaxSpaceValid
             }
-            return incomingSalary <= (outgoingSalary * 1.75) + this.oneHundredThousand
+            let isTaxSpaceValid = incomingSalary <= (outgoingSalary * 1.75) + this.oneHundredThousand
+            if (!isTaxSpaceValid) {
+                this.failedReasonMessage = `For trade to work ${team.teamName} must remove ${this.asMillions((incomingSalary - ((outgoingSalary * 1.75) + this.oneHundredThousand)))} from their incoming salary.`
+            }
+            return isTaxSpaceValid
         }
 
         // Handle when outgoing salary is between $6,533,333 and $19,600,000 andd the pre trade tax space is positive
@@ -172,9 +185,17 @@ export class Trade {
             // The max incoming salary is the greater of 125% of the outgoing salary plus 100k and the outgoing salary plus the tax space
             if (outgoingSalary + this.fiveMillion - afterTradeTaxSpace < 0) {
                 let maxIncomingSalary = Math.max(outgoingSalary + afterTradeTaxSpace, (outgoingSalary * 1.25) + this.oneHundredThousand)
-                return incomingSalary <= maxIncomingSalary
+                let isTaxSpaceValid = incomingSalary <= maxIncomingSalary
+                if (!isTaxSpaceValid) {
+                    this.failedReasonMessage = `For trade to work ${team.teamName} must remove ${this.asMillions((incomingSalary - maxIncomingSalary))} from their incoming salary.`
+                }
+                return isTaxSpaceValid
             }
-            return incomingSalary <= outgoingSalary + this.fiveMillion
+            let isTaxSpaceValid = incomingSalary <= outgoingSalary + this.fiveMillion
+            if (!isTaxSpaceValid) {
+                this.failedReasonMessage = `For trade to work ${team.teamName} must remove ${this.asMillions((incomingSalary - (outgoingSalary + this.fiveMillion)))} from their incoming salary.`
+            }
+            return isTaxSpaceValid
         }
 
         // The function should never get here

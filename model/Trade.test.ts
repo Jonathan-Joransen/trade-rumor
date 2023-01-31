@@ -61,3 +61,34 @@ describe("Trade works under 175% + $100k rule", () => {
        expect(isValid).toBe(true);
     });
 });
+
+describe("Trade failed reason is correct", () => {
+    let teams: Team[] = [
+        new Team("Nuggets", "Denver", -10539228, -48377689, "West", false),
+        new Team("Warriors", "Golden State", -39227053, -78436306, "West", false)
+    ]
+    
+    let playersInTrade: PlayerInTrade[] = [
+        new PlayerInTrade(
+            new RosterPlayer("J", "Poole", "Warriors", 25378280, 3901399),
+            "Nuggets"),
+        new PlayerInTrade(
+            new RosterPlayer("K", "Looney", "Warriors", 7000000, 7000000),
+            "Nuggets"),
+        new PlayerInTrade(
+            new RosterPlayer("K", "Caldwell-Pope", "Nuggets", 14004703, 14004703),
+            "Warriors"),
+        new PlayerInTrade(
+            new RosterPlayer("M", "Porter Jr.", "Nuggets", 30913750, 30913750),
+            "Warriors"),
+        new PlayerInTrade(
+            new RosterPlayer("N", "Hyland", "Nuggets", 2201520, 2201520),
+            "Warriors"),
+        ]
+    it("Failed Reason is correct", () => {
+        let trade = new Trade(playersInTrade, teams);
+        let isValid = trade.isValidTrade();
+        console.log(trade.failedReasonMessage)
+       expect(trade.failedReasonMessage).toBe("For trade to work Warriors must remove $33.6M from their incoming salary.");
+    });
+});
