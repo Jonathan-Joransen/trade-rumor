@@ -94,6 +94,10 @@
 .footer {
   max-height: 8vh;
   position: absolute;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  gap: 1rem;
   background-color: #191610;
   bottom: 0;
   flex: 1;
@@ -109,9 +113,52 @@
   justify-content: flex-end;
   align-items: center;
   text-decoration: underline;
-  flex-grow: 1;
 }
 
 .footer a:hover {
   cursor: pointer;
+}
+
+.aboutContainer,
+.contactContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  gap: 1rem;
+  padding: 2rem;
+}
+
+.aboutContent {
+  max-width: 45rem;
+  margin: 0 auto;
+}
+
+.aboutTitle {
+  font-family: var(--fontFamily);
+  font-weight: 600;
+  font-size: 1.5em;
+  text-align: center;
+  width: 100%;
+}
+
+.aboutTextContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 1rem;
+  width: 100%;
+}
+
+.aboutText {
+  font-family: var(--fontFamily);
+  font-weight: 400;
+  font-size: 1.2em;
+  text-align: left;
+}
+
+.aboutText a {
+  text-decoration: underline;
 }

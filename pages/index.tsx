@@ -37,6 +37,15 @@ export const Home = () => {
         <Link className={styles.viewSavedLink} href={"./trade/saved"}>
           view saved
         </Link>
+        <Link className={styles.viewSavedLink} href={"./contact"}>
+          contact
+        </Link>
+        <Link className={styles.viewSavedLink} href={"./about"}>
+          about
+        </Link>
+        <Link className={styles.viewSavedLink} href={"./privacypolicy"}>
+          privacy
+        </Link>
       </footer>
     </div>
   );

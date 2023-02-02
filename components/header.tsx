@@ -4,7 +4,7 @@ import styles from "../styles/Header.module.css";
 export const Header = ({
   buttonProps,
 }: {
-  buttonProps: { text: string; icon: string; onClick: () => void };
+  buttonProps: { text: string; icon: string; onClick: () => void } | null;
 }) => {
 
   return (
@@ -18,10 +18,12 @@ export const Header = ({
           <div className={styles.headerText}>Trade Rumor</div>
         </div>
       </Link>
+      {buttonProps && (
       <div className={styles.headerButton} onClick={buttonProps.onClick}>
         <div className={styles.headerButtonText}>{buttonProps.text}</div>
         <img className={styles.headerButtonIcon} src={buttonProps.icon}></img>
       </div>
+      )}
     </div>
   );
 };
