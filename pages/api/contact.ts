@@ -13,6 +13,7 @@ export default async function handler(
 
     const mailService = new MailService();
     await mailService.sendMail({
+        from: process.env.CONTACT_EMAIL,
         to: process.env.CONTACT_EMAIL,
         subject: 'Contact Form: ' + subject,
         text: text,
