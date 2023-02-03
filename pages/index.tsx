@@ -7,8 +7,11 @@ export const Home = () => {
     <div className={styles.container}>
       <Head>
         <title>NBA Trade Rumor</title>
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2792567691913768"crossOrigin="anonymous">
-        </script>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2792567691913768"
+          crossOrigin="anonymous"
+        ></script>
         <meta
           name="description"
           content="See if NBA trades work using up to date live data."
@@ -16,6 +19,9 @@ export const Home = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
+        {/* <!-- Ezoic - top_of_page - top_of_page --> */}
+        <div id="ezoic-pub-ad-placeholder-162"> </div>
+        {/* <!-- End Ezoic - top_of_page - top_of_page --> */}
         <div className={styles.titleContainer}>
           <h1 className={styles.title}>Trade Rumor</h1>
           <p className={styles.subtitle}>The trade machine that's accurate</p>
@@ -24,13 +30,18 @@ export const Home = () => {
           <ul className={styles.featuresList}>
             <li className={styles.featuresItem}>Step 1. Pick Teams</li>
             <li className={styles.featuresItem}>Step 2. Pick Players</li>
-            <li className={styles.featuresItem}>Step 3. See If Your Trade Works</li>
+            <li className={styles.featuresItem}>
+              Step 3. See If Your Trade Works
+            </li>
           </ul>
 
           <Link className={styles.startLink} href={"./trade"}>
             Start Trading
           </Link>
         </div>
+        {/* <!-- Ezoic - bottom_of_page - bottom_of_page --> */}
+        <div id="ezoic-pub-ad-placeholder-164"> </div>
+        {/* <!-- End Ezoic - bottom_of_page - bottom_of_page --> */}
       </main>
 
       <footer className={styles.footer}>
@@ -49,7 +60,7 @@ export const Home = () => {
       </footer>
     </div>
   );
-}
+};
 
 Home.auth = false;
 

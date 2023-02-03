@@ -29,9 +29,7 @@ export const ContactPage = () => {
         "Success! We will get back to you as soon as possible."
       );
     } else {
-      setCompletedMessage(
-        "Error sending email, Please try again later."
-      );
+      setCompletedMessage("Error sending email, Please try again later.");
     }
     setShowCompleted(true);
   };
@@ -39,6 +37,9 @@ export const ContactPage = () => {
   return (
     <div className={styles.container}>
       <Header buttonProps={null}></Header>
+      {/* <!-- Ezoic - top_of_page - top_of_page --> */}
+      <div id="ezoic-pub-ad-placeholder-162"> </div>
+      {/* <!-- End Ezoic - top_of_page - top_of_page --> */}
       <div className={styles.content}>
         <div className={styles.wrapper}>
           <div className={styles.header}>Contact Us</div>
@@ -83,6 +84,9 @@ export const ContactPage = () => {
           )}
         </div>
       </div>
+      {/* <!-- Ezoic - bottom_of_page - bottom_of_page --> */}
+      <div id="ezoic-pub-ad-placeholder-164"> </div>
+      {/* <!-- End Ezoic - bottom_of_page - bottom_of_page --> */}
     </div>
   );
 };

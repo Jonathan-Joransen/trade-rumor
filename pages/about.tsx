@@ -6,6 +6,9 @@ const About = () => {
   return (
     <div className={styles.aboutContainer}>
       <Header buttonProps={null}></Header>
+      {/* <!-- Ezoic - top_of_page - top_of_page --> */}
+      <div id="ezoic-pub-ad-placeholder-162"> </div>
+      {/* <!-- End Ezoic - top_of_page - top_of_page --> */}
       <div className={styles.aboutContent}>
         <h1 className={styles.aboutTitle}>About Us</h1>
         <div className={styles.aboutTextContainer}>
@@ -16,9 +19,9 @@ const About = () => {
           </div>
           <div className={styles.aboutText}>
             As such, we are always looking to improve. Unlike other trade
-            machines, you can reach us on the <Link href="/contact">Contact Us</Link> tab with any errors you
-            see or suggestions you have so we don't have inaccuracies or
-            glitches.
+            machines, you can reach us on the{" "}
+            <Link href="/contact">Contact Us</Link> tab with any errors you see
+            or suggestions you have so we don't have inaccuracies or glitches.
           </div>
           <div className={styles.aboutText}>
             We are looking to grow into adding more and better features down the
@@ -34,6 +37,9 @@ const About = () => {
           </div>
         </div>
       </div>
+      {/* <!-- Ezoic - bottom_of_page - bottom_of_page --> */}
+      <div id="ezoic-pub-ad-placeholder-164"> </div>
+      {/* <!-- End Ezoic - bottom_of_page - bottom_of_page --> */}
     </div>
   );
 };

@@ -73,6 +73,9 @@ export const TradeResultsFromId = ({
           onClick: handleViewSaved,
         }}
       />
+      {/* <!-- Ezoic - top_of_page - top_of_page --> */}
+      <div id="ezoic-pub-ad-placeholder-162"> </div>
+      {/* <!-- End Ezoic - top_of_page - top_of_page --> */}
       <div className={styles.tradeContainer}>
         <div className={styles.tradeHeader}>
           {tradeResult.isTradeValid ? (
@@ -113,7 +116,9 @@ export const TradeResultsFromId = ({
                 <TeamPreview
                   team={team}
                   selectedPlayers={tradeResult.trade.playersInTrade.filter(
-                    (player) => player.toTeamName == team.teamName || player.fromTeamName == team.teamName
+                    (player) =>
+                      player.toTeamName == team.teamName ||
+                      player.fromTeamName == team.teamName
                   )}
                 />
               </div>
@@ -121,6 +126,9 @@ export const TradeResultsFromId = ({
           })}
         </div>
       </div>
+      {/* <!-- Ezoic - bottom_of_page - bottom_of_page --> */}
+      <div id="ezoic-pub-ad-placeholder-164"> </div>
+      {/* <!-- End Ezoic - bottom_of_page - bottom_of_page --> */}
     </div>
   );
 };
