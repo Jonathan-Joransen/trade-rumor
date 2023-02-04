@@ -1,7 +1,7 @@
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect } from "react";
 import { Header } from "../../components/header";
 import { TeamPreview } from "../../components/teamPreview";
 import DatabaseClient from "../../data/Database";
@@ -13,7 +13,14 @@ export const TradeResultsFromId = ({
 }: {
   tradeResult: TradeResult;
 }) => {
-  let router = useRouter();
+  const router = useRouter();
+  
+  useEffect(() => {
+    if (!router.asPath.includes('#loaded')) {
+      router.push(window.location + '#loaded')
+      router.reload()
+    }
+  }, [])
   const saveImg = React.createRef<HTMLImageElement>();
 
   let handleViewSaved = () => {

@@ -1,6 +1,6 @@
 import { GetServerSideProps } from "next";
 import Head from "next/head";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { Header } from "../../components/header";
 import { TeamPreview } from "../../components/teamPreview";
@@ -12,7 +12,15 @@ import Team from "../../model/Team";
 import styles from "../../styles/Trading.module.css";
 
 export const Trading = ({ teams }: { teams: Team[]}): React.ReactNode => {
-  let router = useRouter();
+  const router = useRouter();
+  
+  useEffect(() => {
+    if (!router.asPath.includes('#loaded')) {
+      router.push(window.location + '#loaded')
+      router.reload()
+    }
+  }, [])
+
   const [selectedPlayers, setSelectedPlayers] = useState(new Array<PlayerInTrade>());
   const [activeTeams, setActiveTeams] = useState(teams);
 
