@@ -15,12 +15,6 @@ export const TradeResultsFromId = ({
 }) => {
   const router = useRouter();
   
-  useEffect(() => {
-    if (!router.asPath.includes('#loaded')) {
-      router.push(window.location + '#loaded')
-      router.reload()
-    }
-  }, [])
   const saveImg = React.createRef<HTMLImageElement>();
 
   let handleViewSaved = () => {

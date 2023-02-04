@@ -13,13 +13,6 @@ import styles from "../../styles/Trading.module.css";
 
 export const Trading = ({ teams }: { teams: Team[]}): React.ReactNode => {
   const router = useRouter();
-  
-  useEffect(() => {
-    if (!router.asPath.includes('#loaded')) {
-      router.push(window.location + '#loaded')
-      router.reload()
-    }
-  }, [])
 
   const [selectedPlayers, setSelectedPlayers] = useState(new Array<PlayerInTrade>());
   const [activeTeams, setActiveTeams] = useState(teams);

@@ -1,17 +1,8 @@
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { Header } from "../components/header";
 import styles from "../styles/Contact.module.css";
 
 export const ContactPage = () => {
-  const router = useRouter();
-  
-  useEffect(() => {
-    if (!router.asPath.includes('#loaded')) {
-      router.push(window.location + '#loaded')
-      router.reload()
-    }
-  }, [])
   const [showCompleted, setShowCompleted] = useState(false);
   const [message, setMessage] = useState("");
   const [subject, setSubject] = useState("");

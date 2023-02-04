@@ -7,12 +7,6 @@ import styles from "../../styles/SavedTrades.module.css";
 export const SavedTrades = () => {
   const router = useRouter();
   
-  useEffect(() => {
-    if (!router.asPath.includes('#loaded')) {
-      router.push(window.location + '#loaded')
-      router.reload()
-    }
-  }, [])
   const [savedTrades, setSavedTrades] = useState<TradeResult[]>([]);
 
   useEffect(() => {

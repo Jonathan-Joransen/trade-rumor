@@ -5,14 +5,6 @@ import Router, { useRouter } from "next/router";
 import { useEffect } from "react";
 
 const About = () => {
-  const router = useRouter();
-  
-  useEffect(() => {
-    if (!router.asPath.includes('#loaded')) {
-      router.push(window.location + '#loaded')
-      router.reload()
-    }
-  }, [])
   return (
     <div className={styles.aboutContainer}>
       <Header buttonProps={null}></Header>
