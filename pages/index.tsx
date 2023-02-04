@@ -18,7 +18,7 @@ export const Home = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div data-ezoicname="top_of_page_home" id="ezoic-pub-ad-placeholder-175">street </div>
+      <div data-ezoicname="top_of_page_home" id="ezoic-pub-ad-placeholder-175"></div>
       <main className={styles.main}>
         <div className={styles.titleContainer}>
           <h1 className={styles.title}>Trade Rumor</h1>
