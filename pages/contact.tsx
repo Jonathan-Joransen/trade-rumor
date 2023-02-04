@@ -37,9 +37,7 @@ export const ContactPage = () => {
   return (
     <div className={styles.container}>
       <Header buttonProps={null}></Header>
-      {/* <!-- Ezoic - top_of_page - top_of_page --> */}
-      <div id="ezoic-pub-ad-placeholder-162"> </div>
-      {/* <!-- End Ezoic - top_of_page - top_of_page --> */}
+      <div data-ezoicname="top_of_page_contact" id="ezoic-pub-ad-placeholder-173"> </div>
       <div className={styles.content}>
         <div className={styles.wrapper}>
           <div className={styles.header}>Contact Us</div>
@@ -84,9 +82,7 @@ export const ContactPage = () => {
           )}
         </div>
       </div>
-      {/* <!-- Ezoic - bottom_of_page - bottom_of_page --> */}
-      <div id="ezoic-pub-ad-placeholder-164"> </div>
-      {/* <!-- End Ezoic - bottom_of_page - bottom_of_page --> */}
+      <div data-ezoicname="bottom_of_page_contact" id="ezoic-pub-ad-placeholder-174"> </div>
     </div>
   );
 };

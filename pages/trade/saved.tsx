@@ -48,9 +48,7 @@ export const SavedTrades = () => {
           onClick: handleNewTrade,
         }}
       ></Header>
-      {/* <!-- Ezoic - top_of_page - top_of_page --> */}
-      <div id="ezoic-pub-ad-placeholder-162"> </div>
-      {/* <!-- End Ezoic - top_of_page - top_of_page --> */}
+      <div data-ezoicname="top_of_page" id="ezoic-pub-ad-placeholder-162"> </div>
       {savedTrades && (
         <div className={styles.savedTradesContainer}>
           {savedTrades &&
@@ -99,9 +97,7 @@ export const SavedTrades = () => {
             })}
         </div>
       )}
-      {/* <!-- Ezoic - bottom_of_page - bottom_of_page --> */}
-      <div id="ezoic-pub-ad-placeholder-164"> </div>
-      {/* <!-- End Ezoic - bottom_of_page - bottom_of_page --> */}
+      <div data-ezoicname="bottom_of_page" id="ezoic-pub-ad-placeholder-164"> </div>
     </div>
   );
 };

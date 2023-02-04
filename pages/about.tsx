@@ -6,9 +6,7 @@ const About = () => {
   return (
     <div className={styles.aboutContainer}>
       <Header buttonProps={null}></Header>
-      {/* <!-- Ezoic - top_of_page - top_of_page --> */}
-      <div id="ezoic-pub-ad-placeholder-162"> </div>
-      {/* <!-- End Ezoic - top_of_page - top_of_page --> */}
+      <div data-ezoicname="top_of_page_about" id="ezoic-pub-ad-placeholder-172"> </div>
       <div className={styles.aboutContent}>
         <h1 className={styles.aboutTitle}>About Us</h1>
         <div className={styles.aboutTextContainer}>
@@ -37,9 +35,7 @@ const About = () => {
           </div>
         </div>
       </div>
-      {/* <!-- Ezoic - bottom_of_page - bottom_of_page --> */}
-      <div id="ezoic-pub-ad-placeholder-164"> </div>
-      {/* <!-- End Ezoic - bottom_of_page - bottom_of_page --> */}
+      <div data-ezoicname="bottom_of_page_about" id="ezoic-pub-ad-placeholder-171"> </div>
     </div>
   );
 };

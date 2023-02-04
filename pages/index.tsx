@@ -18,10 +18,8 @@ export const Home = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <div data-ezoicname="top_of_page_home" id="ezoic-pub-ad-placeholder-175">street </div>
       <main className={styles.main}>
-        {/* <!-- Ezoic - top_of_page - top_of_page --> */}
-        <div id="ezoic-pub-ad-placeholder-162"> </div>
-        {/* <!-- End Ezoic - top_of_page - top_of_page --> */}
         <div className={styles.titleContainer}>
           <h1 className={styles.title}>Trade Rumor</h1>
           <p className={styles.subtitle}>The trade machine that's accurate</p>
@@ -39,9 +37,6 @@ export const Home = () => {
             Start Trading
           </Link>
         </div>
-        {/* <!-- Ezoic - bottom_of_page - bottom_of_page --> */}
-        <div id="ezoic-pub-ad-placeholder-164"> </div>
-        {/* <!-- End Ezoic - bottom_of_page - bottom_of_page --> */}
       </main>
 
       <footer className={styles.footer}>

@@ -73,9 +73,7 @@ export const TradeResultsFromId = ({
           onClick: handleViewSaved,
         }}
       />
-      {/* <!-- Ezoic - top_of_page - top_of_page --> */}
-      <div id="ezoic-pub-ad-placeholder-162"> </div>
-      {/* <!-- End Ezoic - top_of_page - top_of_page --> */}
+      <div data-ezoicname="mid_content_trade_completed" id="ezoic-pub-ad-placeholder-170"> </div>
       <div className={styles.tradeContainer}>
         <div className={styles.tradeHeader}>
           {tradeResult.isTradeValid ? (
@@ -126,9 +124,7 @@ export const TradeResultsFromId = ({
           })}
         </div>
       </div>
-      {/* <!-- Ezoic - bottom_of_page - bottom_of_page --> */}
-      <div id="ezoic-pub-ad-placeholder-164"> </div>
-      {/* <!-- End Ezoic - bottom_of_page - bottom_of_page --> */}
+      <div data-ezoicname="bottom_of_page_trade_completed" id="ezoic-pub-ad-placeholder-169"> </div>
     </div>
   );
 };
