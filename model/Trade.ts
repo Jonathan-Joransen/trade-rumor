@@ -9,10 +9,12 @@ export class Trade {
     playersInTrade: PlayerInTrade[]
     teams: Team[]
     failedReasonMessage: string
+    failedLocation: string
     constructor(playersInTrade: PlayerInTrade[], teams: Team[]) {
         this.playersInTrade = playersInTrade
         this.teams = teams
         this.failedReasonMessage = ''
+        this.failedLocation = ''
     }
 
     oneHundredThousand = 100000
@@ -78,10 +80,14 @@ export class Trade {
         let outgoingSalary = outgoingPlayers.reduce((total, player) => total + player.player.outgoingSalary, 0)
         let incomingSalary = incomingPlayers.reduce((total, player) => total + player.player.incomingSalary, 0)
 
+        console.log(team.teamName)
+        outgoingPlayers.forEach(player => console.log(`outgoing player: ${player.player.playerName} outgoing salary: ${player.player.outgoingSalary}`))
+        console.log(`outgoing salary: ${outgoingSalary}`)
         let isTaxApronValid = this._isTaxApronValid(incomingSalary, outgoingSalary, team)
         if (!isTaxApronValid) {
             console.log("tax apron not valid")
             this.failedReasonMessage = `For trade to work ${team.teamName} must remove ${this.asMillions((incomingSalary - outgoingSalary - team.taxApron))} from their incoming salary.`
+            this.failedLocation = 'tax apron'
             return false
         }
 
@@ -89,6 +95,7 @@ export class Trade {
 
         // If cap space is not valid, check if tax space is valid
         if (!isCapSpaceValid) {
+            console.log(`running tax space validation for ${team.teamName}`)
             let isTaxSpaceValid = this._isTaxSpaceValid(incomingSalary, outgoingSalary, team)
             console.log(`isTaxSpaceValid: ${isTaxSpaceValid}`)
             console.log(`incomingSalary: ${incomingSalary} outgoingSalary: ${outgoingSalary} team.taxSpace: ${team.taxSpace}`)
@@ -137,24 +144,29 @@ export class Trade {
     _isCapSpaceValid(outgoingSalary: number, incomingSalary: number, team: Team, incomingPlayers: PlayerInTrade[]) {
         if (team.capSpace < 0) {
             this.failedReasonMessage = `For trade to work ${team.teamName} must remove ${this.asMillions((incomingSalary - outgoingSalary - team.capSpace))} from their incoming salary.`
+            this.failedLocation = 'cap space less than 0'
             return false
         }
 
         if (incomingSalary - outgoingSalary > team.capSpace) {
             this.failedReasonMessage = `For trade to work ${team.teamName} must remove ${this.asMillions((incomingSalary - outgoingSalary - team.capSpace))} from their incoming salary.`
-            return this._isCapSpaceExceptionValid(outgoingSalary + team.capSpace, incomingPlayers, team)
+            this.failedLocation = 'cap space less than incoming salary - outgoing salary'
+            return this._isCapSpaceExceptionValid(outgoingSalary + team.capSpace, outgoingSalary, incomingPlayers, team)
         }
         return true
     }
 
     _isTaxSpaceValid(incomingSalary: number, outgoingSalary: number, team: Team) {
         let afterTradeTaxSpace = incomingSalary - outgoingSalary - team.taxSpace
+        console.log(`teamName ${team.teamName} incomingSalary: ${incomingSalary} outgoingSalary: ${outgoingSalary} team.taxSpace: ${team.taxSpace} afterTradeTaxSpace: ${afterTradeTaxSpace}`)
 
         // If the pre trade tax space is negative, the trade max incoming salary is 125% of outgoing salary plus 100k
         // If the outgoingSalary is over $19,600,000, the trade max incoming salary is 125% of outgoing salary plus 100k
         if (afterTradeTaxSpace > 0 || outgoingSalary > 19600000) {
+            console.log(`tax space is positive or outgoing salary is over 19.6 million`)
             let isTaxSpaceValid = incomingSalary <= (outgoingSalary * 1.25) + this.oneHundredThousand
             if (!isTaxSpaceValid) {
+                this.failedLocation = 'tax space with outgoing salary over 19.6 million'
                 this.failedReasonMessage = `For trade to work ${team.teamName} must remove ${this.asMillions((incomingSalary - ((outgoingSalary * 1.25) + this.oneHundredThousand)))} from their incoming salary.`
             }
             return isTaxSpaceValid
@@ -168,12 +180,14 @@ export class Trade {
                 let maxIncomingSalary = Math.max(outgoingSalary + afterTradeTaxSpace, (outgoingSalary * 1.25) + this.oneHundredThousand)
                 let isTaxSpaceValid = incomingSalary <= maxIncomingSalary
                 if (!isTaxSpaceValid) {
+                    this.failedLocation = 'tax space with outgoing salary between 0 and 6.5333333 and tax space negative'
                     this.failedReasonMessage = `For trade to work ${team.teamName} must remove ${this.asMillions((incomingSalary - maxIncomingSalary))} from their incoming salary.`
                 }
                 return isTaxSpaceValid
             }
             let isTaxSpaceValid = incomingSalary <= (outgoingSalary * 1.75) + this.oneHundredThousand
             if (!isTaxSpaceValid) {
+                this.failedLocation = 'tax space with outgoing salary between 0 and 6.5333333'
                 this.failedReasonMessage = `For trade to work ${team.teamName} must remove ${this.asMillions((incomingSalary - ((outgoingSalary * 1.75) + this.oneHundredThousand)))} from their incoming salary.`
             }
             return isTaxSpaceValid
@@ -187,12 +201,14 @@ export class Trade {
                 let maxIncomingSalary = Math.max(outgoingSalary + afterTradeTaxSpace, (outgoingSalary * 1.25) + this.oneHundredThousand)
                 let isTaxSpaceValid = incomingSalary <= maxIncomingSalary
                 if (!isTaxSpaceValid) {
+                    this.failedLocation = 'tax space with outgoing salary between 6.5333333 and 19.6 million and tax space negative'
                     this.failedReasonMessage = `For trade to work ${team.teamName} must remove ${this.asMillions((incomingSalary - maxIncomingSalary))} from their incoming salary.`
                 }
                 return isTaxSpaceValid
             }
             let isTaxSpaceValid = incomingSalary <= outgoingSalary + this.fiveMillion
             if (!isTaxSpaceValid) {
+                this.failedLocation = 'tax space with outgoing salary between 6.5333333 and 19.6 million'
                 this.failedReasonMessage = `For trade to work ${team.teamName} must remove ${this.asMillions((incomingSalary - (outgoingSalary + this.fiveMillion)))} from their incoming salary.`
             }
             return isTaxSpaceValid
@@ -203,22 +219,28 @@ export class Trade {
     }
 
     _isTaxApronValid(incomingSalary: number, outgoingSalary: number, team: Team) {
-        if (incomingSalary - outgoingSalary > team.taxApron && team.hardCap) {
+        console.log(`[Info] Validating tax apron for ${team.teamName} with outgoing salary ${outgoingSalary} and incoming salary ${incomingSalary} hard cap ${team.hardCap} tax apron ${team.taxApron}`)
+        console.log(`[Info] ${incomingSalary - outgoingSalary} > ${team.taxApron} && ${team.hardCap}`)
+        console.log((incomingSalary - outgoingSalary) > team.taxApron)
+        if ((incomingSalary - outgoingSalary) > team.taxApron && team.hardCap) {
             return false
         }
         return true
     }
 
-    _isCapSpaceExceptionValid(capSpace: number, incomingPlayers: PlayerInTrade[], team: Team) {
+    _isCapSpaceExceptionValid(capSpace: number, outgoingSalary: number, incomingPlayers: PlayerInTrade[], team: Team) {
+        console.log(`[Info] Validating cap space exception for ${team.teamName} with cap space ${capSpace} and incoming players ${incomingPlayers.map(player => player.player.playerName)}`)
+        
         // Get max salary combination that fits into cap space
         let playersThatFitInCapSpace = this._getPlayersThatFitIntoCapSpace(capSpace, incomingPlayers)
+        console.log(`[Info] Players that fit into cap space ${playersThatFitInCapSpace?.map(player => player.player.playerName)}`)
 
         // Get players that dont fit into cap space and validate if the comply via tax space
         let playersThatDontFitInCapSpace = incomingPlayers.filter(player => !playersThatFitInCapSpace?.includes(player))
+        console.log(`[Info] Players that dont fit into cap space ${playersThatDontFitInCapSpace.map(player => player.player.playerName)}`)
 
-        // Get incoming and outgoing salary for players that dont fit into cap space
+        // Get incoming salary for players that dont fit into cap space
         let incomingSalary = playersThatDontFitInCapSpace.reduce((total, player) => total + player.player.incomingSalary, 0)
-        let outgoingSalary = playersThatDontFitInCapSpace.reduce((total, player) => total + player.player.outgoingSalary, 0)
 
         // Validate if the players that dont fit into cap space comply via tax space
         return this._isTaxSpaceValid(incomingSalary, outgoingSalary, team)

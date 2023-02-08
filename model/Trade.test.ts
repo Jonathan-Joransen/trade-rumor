@@ -21,8 +21,8 @@ let playersInTrade: PlayerInTrade[] = [
 
 describe("Trade", () => {
     let teams: Team[] = [
-        new Team("Heat", "Miami", 185171, -300722202, "East", false),
-        new Team("Pistons", "Detroit", 27317721, 6627400, "East", false)
+        new Team("Heat", "Miami", 185171, 300722202, "East", false),
+        new Team("Pistons", "Detroit", 27317721, 68627400, "East", false)
     ]
     
     let playersInTrade: PlayerInTrade[] = [
@@ -59,6 +59,29 @@ describe("Trade works under 175% + $100k rule", () => {
         let isValid = trade.isValidTrade();
         console.log(trade.failedReasonMessage)
        expect(isValid).toBe(true);
+    });
+});
+
+describe("Trade fails", () => {
+    let teams: Team[] = [
+        new Team("Grizzlies", "Memphis", 28893640, 705335, "East", true),
+        new Team("Timberwolves", "Minnisota", 3059175, -55085691, "East", true)
+    ]
+    
+    let playersInTrade: PlayerInTrade[] = [
+        new PlayerInTrade(
+            new RosterPlayer("J", "Jackson Jr", "Grizzlies", 28946605, 28946605),
+            "Timberwolves"),
+        new PlayerInTrade(
+            new RosterPlayer("C", "Gobert", "Timberwolves", 38172414, 38172414),
+            "Grizzlies")
+        ]
+    it("Trade should fail", () => {
+        let trade = new Trade(playersInTrade, teams);
+        let isValid = trade.isValidTrade();
+        console.log("failure: " + trade.failedReasonMessage)
+        console.log("failure: " + trade.failedLocation)
+       expect(isValid).toBe(false);
     });
 });
 
